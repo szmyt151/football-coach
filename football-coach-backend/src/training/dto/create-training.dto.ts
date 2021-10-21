@@ -1,1 +1,5 @@
-export class CreateTrainingDto {}
+export class CreateTrainingDto {
+  date: Date;
+
+  trainingType: string;
+}

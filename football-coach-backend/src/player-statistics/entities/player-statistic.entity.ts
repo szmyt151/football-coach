@@ -6,7 +6,7 @@ export class PlayerStatistic {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(type => Player, team => team.id)
+  @OneToOne(type => Player, player => player.id)
   player: Player;
   
   @Column()

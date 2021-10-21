@@ -1,1 +1,5 @@
-export class CreateTeamMatchDto {}
+export class CreateTeamMatchDto {
+  date: Date;
+
+  matchResult: string;
+}

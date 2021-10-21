@@ -2,10 +2,19 @@ import { Team } from "src/teams/entities/team.entity";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum PlayerPositionEnum {
-  GOALKEAPER = 'Goalkeaper',
-  DEFENDER = 'Defender',
-  MIDFIELDER = 'Midfielder',
-  STRIKER = 'Striker',
+  GK = 'GK - Goalkeeper',
+  CB = 'CB - Center Back',
+  RB = 'RB - Right Back',
+  LB = 'LB - Left Back',       
+  LM = 'LM - Left Midfielder',
+  RM = 'RM - Right Midfielder',
+  CM = 'CM - Center Midfielder',
+  CAM = 'CAM - Center Attacker Midfielder',
+  RW = 'RW - Right Winger',
+  LW = 'LW - Left Winger',
+  LF = 'LF - Left Forward',
+  RF = 'RF - Right Forward',
+  CF = 'CF - Center Forward'
 }
 
 @Entity()

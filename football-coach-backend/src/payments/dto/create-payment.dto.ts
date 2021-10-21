@@ -1,1 +1,5 @@
-export class CreatePaymentDto {}
+export class CreatePaymentDto {
+  value: string
+  description: string
+  paymentType: string;
+}
