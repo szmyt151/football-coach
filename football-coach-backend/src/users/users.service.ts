@@ -12,7 +12,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  findOneByUsername(username: string) {
+  findOneByUsername(username: string): Promise<User> {
     return this.usersRepository.findOne(username);
   }
 
