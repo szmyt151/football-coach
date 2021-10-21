@@ -17,4 +17,10 @@ export class PlayerStatistic {
 
   @Column()
   cleanSheets: number;
+
+  @Column()
+  yellowCards: number;
+
+  @Column()
+  redCards: number;
 }

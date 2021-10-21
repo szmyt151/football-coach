@@ -4,4 +4,8 @@ export class CreatePlayerStatisticDto {
   assists: number;
 
   cleanSheets: number;
+
+  yellowCards: number;
+
+  redCards: number;
 }

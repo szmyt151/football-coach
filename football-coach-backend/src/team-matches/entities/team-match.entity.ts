@@ -6,6 +6,11 @@ export enum TeamMatchResultEnum {
   TIE = 'Tie',
 }
 
+export enum HomeAwayEnum {
+  HOME = 'Home',
+  AWAY = 'Away',
+}
+
 @Entity()
 export class TeamMatch {
   @PrimaryGeneratedColumn()
@@ -16,5 +21,8 @@ export class TeamMatch {
 
   @Column("enum", { enum: TeamMatchResultEnum })
   matchResult: string;
+
+  @Column("enum", { enum: HomeAwayEnum })
+  homeAway: string;
 
 }

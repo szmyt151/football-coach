@@ -17,6 +17,12 @@ export enum PlayerPositionEnum {
   CF = 'CF - Center Forward'
 }
 
+export enum PlayerFootEnum {
+  LEFT = 'Left',
+  RIGHT = 'Right',
+  BOTH = 'Both'
+}
+
 @Entity()
 export class Player {
   @PrimaryGeneratedColumn()
@@ -30,6 +36,9 @@ export class Player {
 
   @Column()
   birth: Date;
+
+  @Column("enum", { enum: PlayerFootEnum })
+  preferredFoot: string;
 
   @Column("enum", { enum: PlayerPositionEnum })
   playerPosition: string;
