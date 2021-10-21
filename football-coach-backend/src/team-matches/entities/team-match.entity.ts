@@ -19,6 +19,9 @@ export class TeamMatch {
   @Column()
   date: Date;
 
+  @Column()
+  opponent: string;
+
   @Column("enum", { enum: TeamMatchResultEnum })
   matchResult: string;
 

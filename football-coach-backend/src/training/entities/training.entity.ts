@@ -17,6 +17,9 @@ export class Training {
   @Column()
   date: Date;
 
+  @Column()
+  duration: number;
+
   @Column("enum", { enum: TrainingEnum })
   trainingType: string;
 
