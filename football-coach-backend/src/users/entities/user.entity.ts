@@ -1,11 +1,7 @@
-import { Role } from "src/auth/role.enum";
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
-  roles: Role[];
-
-
   @PrimaryGeneratedColumn()
   id: number;
 

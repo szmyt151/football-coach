@@ -1,16 +1,41 @@
 version: "3"
 
 services:
-  mysql:
-    image: mysql:8.0
-    ports:
-      - 3380:3306
+  # backend: 
+  #   image: footbalcoach_backend
+  #   build:
+  #      context: ./football-coach-backend
+  #      dockerfile: Dockerfile.backend
+  #     - ./football-coach-backend
+  #   ports:
+  #     - 3000:3000
+  
+  # frontend:
+  #   image: footbalcoach_frontend
+  #   build:
+  #      context: ./football-coach-frontend
+  #      dockerfile: Dockerfile.frontend
+  #   ports:
+  #     - 3001:3000
+
+  postgres:
+    image: postgres:14
+    restart: always
     environment:
-      - MYSQL_DATABASE=footballCoach
-      - MYSQL_USER=student
-      - MYSQL_PASSWORD=studentpassword
-      - MYSQL_ROOT_PASSWORD=rootpassword
+      - POSTGRES_USER=student
+      - POSTGRES_PASSWORD=studentpassword
+      - POSTGRES_DB=footballCoach
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./postgres-data2:/var/lib/postgresql/data
+    networks:
+      - external
 
 volumes:
-  mysql_data:
+  postgres-data2:
     driver: local
+
+networks:
+  external:
+    driver: bridge
