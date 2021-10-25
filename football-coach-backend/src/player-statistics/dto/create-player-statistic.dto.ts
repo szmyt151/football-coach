@@ -8,4 +8,8 @@ export class CreatePlayerStatisticDto {
   yellowCards: number;
 
   redCards: number;
+
+  player: number;
+
+  teamMatch: number;
 }

@@ -1,12 +1,6 @@
 import { Player } from 'src/players/entities/player.entity';
 import { Training } from 'src/training/entities/training.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Team {
@@ -17,9 +11,8 @@ export class Team {
   name: string;
 
   @OneToMany((type) => Player, (player) => player.id)
-  @JoinColumn()
-  players: Player[];
+  players: number[];
 
   @OneToMany((type) => Training, (training) => training.id)
-  trainings: Training[];
+  trainings: number[];
 }

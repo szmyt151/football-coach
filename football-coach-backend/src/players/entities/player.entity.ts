@@ -55,12 +55,12 @@ export class Player {
 
   @OneToOne((type) => Team, (team) => team.id)
   @JoinColumn()
-  team: Team;
+  team: number;
 
   @OneToMany(
     (type) => PlayerStatistic,
-    (playerStatistics) => playerStatistics.id,
+    (playerStatistic) => playerStatistic.player,
   )
   @JoinTable()
-  playerStatistics: PlayerStatistic[];
+  playerStatistics: number[];
 }

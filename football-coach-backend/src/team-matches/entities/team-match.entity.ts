@@ -37,5 +37,9 @@ export class TeamMatch {
 
   @OneToOne((type) => Team, (team) => team.id)
   @JoinColumn()
-  team: Team;
+  team: number;
+
+  @OneToOne((type) => Team, (team) => team.id)
+  @JoinColumn()
+  oponentInDatabase: number;
 }

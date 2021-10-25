@@ -8,4 +8,8 @@ export class CreatePlayerDto {
   preferredFoot: string;
 
   playerPosition: string;
+
+  team: number;
+
+  playerStatistics: number[];
 }

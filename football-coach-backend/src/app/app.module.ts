@@ -14,7 +14,23 @@ import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'student',
+      password: 'studentpassword',
+      database: 'footballCoach',
+      autoLoadEntities: true,
+      entities: ['src/entity/*.ts', './build/src/entity/*.js'],
+      synchronize: true,
+      migrations: ['migrations/*.js'],
+      migrationsTableName: 'migrations_typeorm',
+      migrationsRun: true,
+      cli: {
+        migrationsDir: 'migration',
+      },
+    }),
     UsersModule,
     TeamsModule,
     TrainingModule,

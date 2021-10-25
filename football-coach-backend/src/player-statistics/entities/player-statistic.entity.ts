@@ -1,8 +1,8 @@
 import { Player } from 'src/players/entities/player.entity';
+import { TeamMatch } from 'src/team-matches/entities/team-match.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -13,8 +13,11 @@ export class PlayerStatistic {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne((type) => Player, (player) => player.id)
-  player: Player;
+  @OneToOne((type) => TeamMatch, (teamMatch) => teamMatch.id)
+  teamMatch: number;
+
+  @OneToOne((type) => Player, (player) => player.id)
+  player: number;
 
   @Column()
   goals: number;

@@ -3,4 +3,7 @@ export class CreateTeamMatchDto {
   matchResult: string;
   homeAway: string;
   opponent: string;
+
+  team: number;
+  oponentInDatabase: number;
 }

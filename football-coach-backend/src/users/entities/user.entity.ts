@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Payment } from 'src/payments/entities/payment.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  OneToMany,
+  BeforeInsert,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -19,4 +27,15 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
+
+  // @OneToMany((type) => Payment, (payment) => payment.id)
+  // @JoinColumn()
+  // payments: number[];
+
+  @BeforeInsert()
+  async setPassword(password: string) {
+    // const salt = await bcrypt.genSalt()
+    // this.password = await bcrypt.hash(password || this.password, salt)
+    this.password = this.password;
+  }
 }

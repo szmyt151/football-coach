@@ -8,4 +8,6 @@ export class CreateUserDto {
   password: string;
 
   isActive: boolean;
+
+  // payments: number[];
 }
