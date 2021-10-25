@@ -1,14 +1,21 @@
-import { Player } from "src/players/entities/player.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Player } from 'src/players/entities/player.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class PlayerStatistic {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(type => Player, player => player.id)
+  @ManyToOne((type) => Player, (player) => player.id)
   player: Player;
-  
+
   @Column()
   goals: number;
 

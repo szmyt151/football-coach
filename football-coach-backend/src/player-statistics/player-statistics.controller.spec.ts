@@ -11,7 +11,9 @@ describe('PlayerStatisticsController', () => {
       providers: [PlayerStatisticsService],
     }).compile();
 
-    controller = module.get<PlayerStatisticsController>(PlayerStatisticsController);
+    controller = module.get<PlayerStatisticsController>(
+      PlayerStatisticsController,
+    );
   });
 
   it('should be defined', () => {

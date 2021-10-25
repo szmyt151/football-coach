@@ -1,11 +1,21 @@
-import { Team } from "src/teams/entities/team.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { PlayerStatistic } from 'src/player-statistics/entities/player-statistic.entity';
+import { Team } from 'src/teams/entities/team.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum PlayerPositionEnum {
   GK = 'GK - Goalkeeper',
   CB = 'CB - Center Back',
   RB = 'RB - Right Back',
-  LB = 'LB - Left Back',       
+  LB = 'LB - Left Back',
   LM = 'LM - Left Midfielder',
   RM = 'RM - Right Midfielder',
   CM = 'CM - Center Midfielder',
@@ -14,13 +24,13 @@ export enum PlayerPositionEnum {
   LW = 'LW - Left Winger',
   LF = 'LF - Left Forward',
   RF = 'RF - Right Forward',
-  CF = 'CF - Center Forward'
+  CF = 'CF - Center Forward',
 }
 
 export enum PlayerFootEnum {
   LEFT = 'Left',
   RIGHT = 'Right',
-  BOTH = 'Both'
+  BOTH = 'Both',
 }
 
 @Entity()
@@ -37,12 +47,20 @@ export class Player {
   @Column()
   birth: Date;
 
-  @Column("enum", { enum: PlayerFootEnum })
+  @Column('enum', { enum: PlayerFootEnum })
   preferredFoot: string;
 
-  @Column("enum", { enum: PlayerPositionEnum })
+  @Column('enum', { enum: PlayerPositionEnum })
   playerPosition: string;
 
-  @OneToOne(type => Team, team => team.id)
+  @OneToOne((type) => Team, (team) => team.id)
+  @JoinColumn()
   team: Team;
+
+  @OneToMany(
+    (type) => PlayerStatistic,
+    (playerStatistics) => playerStatistics.id,
+  )
+  @JoinTable()
+  playerStatistics: PlayerStatistic[];
 }

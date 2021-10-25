@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreatePlayerStatisticDto } from './dto/create-player-statistic.dto';
 import { UpdatePlayerStatisticDto } from './dto/update-player-statistic.dto';
+import { PlayerStatistic } from './entities/player-statistic.entity';
 
 @Injectable()
 export class PlayerStatisticsService {
-  create(createPlayerStatisticDto: CreatePlayerStatisticDto) {
-    return 'This action adds a new playerStatistic';
+  constructor(
+    @InjectRepository(PlayerStatistic)
+    private playerStatisticRepository: Repository<PlayerStatistic>,
+  ) {}
+
+  findAll(): Promise<PlayerStatistic[]> {
+    return this.playerStatisticRepository.find();
   }
 
-  findAll() {
-    return `This action returns all playerStatistics`;
+  findOne(id: number): Promise<PlayerStatistic> {
+    return this.playerStatisticRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} playerStatistic`;
+  async remove(id: number): Promise<void> {
+    await this.playerStatisticRepository.delete(id);
   }
 
-  update(id: number, updatePlayerStatisticDto: UpdatePlayerStatisticDto) {
-    return `This action updates a #${id} playerStatistic`;
+  async create(createPlayerStatisticDto: CreatePlayerStatisticDto) {
+    this.playerStatisticRepository.create(createPlayerStatisticDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} playerStatistic`;
+  async update(id: number, updatePlayerStatisticDto: UpdatePlayerStatisticDto) {
+    await this.playerStatisticRepository.update(id, updatePlayerStatisticDto);
   }
 }

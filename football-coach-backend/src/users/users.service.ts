@@ -35,5 +35,4 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     await this.usersRepository.update(id, updateUserDto);
   }
-
 }

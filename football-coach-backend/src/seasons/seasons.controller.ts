@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SeasonsService } from './seasons.service';
 import { CreateSeasonDto } from './dto/create-season.dto';
 import { UpdateSeasonDto } from './dto/update-season.dto';

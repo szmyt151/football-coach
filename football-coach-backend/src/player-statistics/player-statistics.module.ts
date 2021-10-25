@@ -4,6 +4,6 @@ import { PlayerStatisticsController } from './player-statistics.controller';
 
 @Module({
   controllers: [PlayerStatisticsController],
-  providers: [PlayerStatisticsService]
+  providers: [PlayerStatisticsService],
 })
 export class PlayerStatisticsModule {}

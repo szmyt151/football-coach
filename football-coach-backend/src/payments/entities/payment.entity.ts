@@ -1,5 +1,11 @@
-import { User } from "src/users/entities/user.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from 'src/users/entities/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum PaymentTypeEnum {
   MEMBER_PAYMENT = 'Member payment',
@@ -11,14 +17,15 @@ export class Payment {
   id: number;
 
   @Column()
-  value: string
-  
-  @Column()
-  description: string
+  value: string;
 
-  @Column("enum", { enum: PaymentTypeEnum })
+  @Column()
+  description: string;
+
+  @Column('enum', { enum: PaymentTypeEnum })
   paymentType: string;
 
-  @OneToOne(type => User, user => user.id)
+  @OneToOne((type) => User, (user) => user.id)
+  @JoinColumn()
   user: User;
 }

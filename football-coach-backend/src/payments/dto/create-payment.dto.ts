@@ -1,5 +1,5 @@
 export class CreatePaymentDto {
-  value: string
-  description: string
+  value: string;
+  description: string;
   paymentType: string;
 }

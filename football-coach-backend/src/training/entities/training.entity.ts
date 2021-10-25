@@ -1,6 +1,13 @@
 import { Player } from 'src/players/entities/player.entity';
 import { Team } from 'src/teams/entities/team.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 
 export enum TrainingEnum {
   CARDIO = 'Cardio',
@@ -20,12 +27,13 @@ export class Training {
   @Column()
   duration: number;
 
-  @Column("enum", { enum: TrainingEnum })
+  @Column('enum', { enum: TrainingEnum })
   trainingType: string;
 
-  @OneToOne(type => Team, team => team.id)
+  @OneToOne((type) => Team, (team) => team.id)
+  @JoinColumn()
   team: Team;
 
-  @OneToMany(type => Player, player => player.id)
+  @OneToMany((type) => Player, (player) => player.id)
   player: Player[];
 }

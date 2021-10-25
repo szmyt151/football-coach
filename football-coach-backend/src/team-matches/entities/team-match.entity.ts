@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Team } from 'src/teams/entities/team.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum TeamMatchResultEnum {
   WIN = 'Win',
@@ -22,10 +29,13 @@ export class TeamMatch {
   @Column()
   opponent: string;
 
-  @Column("enum", { enum: TeamMatchResultEnum })
+  @Column('enum', { enum: TeamMatchResultEnum })
   matchResult: string;
 
-  @Column("enum", { enum: HomeAwayEnum })
+  @Column('enum', { enum: HomeAwayEnum })
   homeAway: string;
 
+  @OneToOne((type) => Team, (team) => team.id)
+  @JoinColumn()
+  team: Team;
 }

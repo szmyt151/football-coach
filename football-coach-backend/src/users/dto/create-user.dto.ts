@@ -8,4 +8,4 @@ export class CreateUserDto {
   password: string;
 
   isActive: boolean;
- }
+}

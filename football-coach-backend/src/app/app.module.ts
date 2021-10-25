@@ -14,16 +14,7 @@ import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'student',
-      password: 'studentpassword',
-      database: 'footballCoach',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     UsersModule,
     TeamsModule,
     TrainingModule,
@@ -34,9 +25,7 @@ import { UsersModule } from 'src/users/users.module';
     PaymentsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-  ],
+  providers: [AppService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}
