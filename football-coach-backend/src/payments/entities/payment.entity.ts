@@ -25,7 +25,7 @@ export class Payment {
   @Column("enum", { enum: PaymentTypeEnum })
   paymentType: string;
 
-  // @OneToOne((type) => Users, (user) => user.id)
-  // @JoinColumn()
-  // user: number;
+  @OneToOne((type) => User, (user) => user.id)
+  @JoinColumn()
+  user: number;
 }

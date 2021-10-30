@@ -1,22 +1,22 @@
-import { Player } from 'src/players/entities/player.entity';
-import { TeamMatch } from 'src/team-matches/entities/team-match.entity';
+import { Player } from "src/players/entities/player.entity";
+import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 import {
   Column,
   Entity,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
 
 @Entity()
 export class PlayerStatistic {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne((type) => TeamMatch, (teamMatch) => teamMatch.id)
+  @ManyToOne((type) => TeamMatch, (teamMatch) => teamMatch.id)
   teamMatch: number;
 
-  @OneToOne((type) => Player, (player) => player.id)
+  @ManyToOne((type) => Player, (player) => player.id)
   player: number;
 
   @Column()

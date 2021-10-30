@@ -1,4 +1,12 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Payment } from "src/payments/entities/payment.entity";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class User {
@@ -20,9 +28,9 @@ export class User {
   @Column("boolean")
   isActive: boolean;
 
-  // @OneToMany((type) => Payment, (payment) => payment.id)
-  // @JoinColumn
-  // payments: number[];
+  @OneToMany((type) => Payment, (payment) => payment.id)
+  @JoinColumn()
+  payments: number[];
 
   @BeforeInsert()
   async setPassword(password: string) {
