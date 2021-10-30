@@ -1,47 +1,41 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
-  private logger: Logger;
-
   constructor(
-    @Inject('USER_REPOSITORY')
-    private usersRepository: Repository<User>,
-  ) {
-    this.logger = new Logger();
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
+  ) {}
+
+  create(createUserDto: CreateUserDto): Promise<User> {
+    const user = new User();
+    user.firstName = createUserDto.firstName;
+    user.lastName = createUserDto.lastName;
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
+    user.isActive = createUserDto.isActive;
+
+    return this.usersRepository.save(user);
   }
 
-  findOneByUsername(username: string): Promise<User> {
-    return this.usersRepository.findOne(username);
-  }
-
-  public findAll(): Promise<User[]> {
-    this.logger.log('create something...');
+  async findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<User> {
+  findOne(id: string): Promise<User> {
     return this.usersRepository.findOne(id);
-  }
-
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
-  }
-
-  public async create(createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    const user = await this.usersRepository.create(createUserDto);
-    this.logger.log('create something...');
-    this.logger.log({ user, createUserDto });
-
-    return await this.usersRepository.save(user);
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     await this.usersRepository.update(id, updateUserDto);
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 }

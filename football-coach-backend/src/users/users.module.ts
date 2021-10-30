@@ -1,18 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { usersProviders } from './users.repository';
-import { Connection } from 'typeorm';
-import { DatabaseModule } from '../database/database.module';
-import { databaseProviders } from 'src/database/database.providers';
+import { User } from './user.entity';
+import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
-  controllers: [UsersController],
   providers: [UsersService],
+  controllers: [UsersController],
 })
-export class UsersModule {
-  constructor(private connection: Connection) {}
-}
+export class UsersModule {}

@@ -1,5 +1,3 @@
-// import { Payment } from 'src/payments/entities/payment.entity';
-
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
