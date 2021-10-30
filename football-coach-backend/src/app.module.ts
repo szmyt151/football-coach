@@ -1,20 +1,34 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { PaymentsModule } from "./payments/payments.module";
+import { PlayerStatisticsModule } from "./player-statistics/player-statistics.module";
+import { PlayersModule } from "./players/players.module";
+import { SeasonsModule } from "./seasons/seasons.module";
+import { TeamMatchesModule } from "./team-matches/team-matches.module";
+import { TeamsModule } from "./teams/teams.module";
+import { TrainingModule } from "./training/training.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
+      type: "postgres",
+      host: "localhost",
       port: 5432,
-      username: 'student',
-      password: 'studentpassword',
-      database: 'footballCoach',
+      username: "student",
+      password: "studentpassword",
+      database: "footballCoach",
       autoLoadEntities: true,
       synchronize: true,
     }),
     UsersModule,
+    TeamsModule,
+    TrainingModule,
+    TeamMatchesModule,
+    SeasonsModule,
+    PlayersModule,
+    PlayerStatisticsModule,
+    PaymentsModule,
   ],
 })
 export class AppModule {}

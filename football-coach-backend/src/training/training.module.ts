@@ -13,5 +13,5 @@ import { Connection } from "typeorm";
   providers: [TrainingService],
 })
 export class TrainingModule {
-  constructor(private connection: Connection) {}
+  constructor() {}
 }
