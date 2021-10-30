@@ -26,6 +26,7 @@ export enum PlayerPositionEnum {
   LF = "LF - Left Forward",
   RF = "RF - Right Forward",
   CF = "CF - Center Forward",
+  ST = "ST - Striker",
 }
 
 export enum PlayerFootEnum {
