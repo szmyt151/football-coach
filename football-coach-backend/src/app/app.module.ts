@@ -11,9 +11,20 @@ import { TeamMatchesModule } from 'src/team-matches/team-matches.module';
 import { TeamsModule } from 'src/teams/teams.module';
 import { TrainingModule } from 'src/training/training.module';
 import { UsersModule } from 'src/users/users.module';
+import { DatabaseModule } from 'src/database/database.module';
+import { databaseProviders } from 'src/database/database.providers';
 
 @Module({
   imports: [
+    UsersModule,
+    TeamsModule,
+    TrainingModule,
+    TeamMatchesModule,
+    SeasonsModule,
+    PlayersModule,
+    PlayerStatisticsModule,
+    PaymentsModule,
+    DatabaseModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -23,25 +34,11 @@ import { UsersModule } from 'src/users/users.module';
       database: 'footballCoach',
       autoLoadEntities: true,
       entities: ['src/entity/*.ts', './build/src/entity/*.js'],
-      synchronize: true,
-      migrations: ['migrations/*.js'],
-      migrationsTableName: 'migrations_typeorm',
-      migrationsRun: true,
-      cli: {
-        migrationsDir: 'migration',
-      },
+      // synchronize: true,
     }),
-    UsersModule,
-    TeamsModule,
-    TrainingModule,
-    TeamMatchesModule,
-    SeasonsModule,
-    PlayersModule,
-    PlayerStatisticsModule,
-    PaymentsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ...databaseProviders],
 })
 export class AppModule {
   constructor(private connection: Connection) {}

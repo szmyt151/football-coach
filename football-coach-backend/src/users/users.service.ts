@@ -1,26 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+  private logger: Logger;
 
-  findOneByUsername(username: string): Promise<User> {
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private usersRepository: Repository<Users>,
+  ) {
+    this.logger = new Logger();
+  }
+
+  findOneByUsername(username: string): Promise<Users> {
     return this.usersRepository.findOne(username);
   }
 
-  findAll(): Promise<User[]> {
+  public findAll(): Promise<Users[]> {
+    this.logger.log('create something...');
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<User> {
+  findOne(id: number): Promise<Users> {
     return this.usersRepository.findOne(id);
   }
 
@@ -28,8 +32,13 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  async create(createUserDto: CreateUserDto) {
-    await this.usersRepository.create(createUserDto);
+  public async create(createUserDto: CreateUserDto) {
+    console.log(createUserDto);
+    const user = await this.usersRepository.create(createUserDto);
+    this.logger.log('create something...');
+    this.logger.log({ user, createUserDto });
+
+    return await this.usersRepository.save(user);
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {

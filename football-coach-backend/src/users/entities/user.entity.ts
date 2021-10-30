@@ -1,15 +1,9 @@
-import { Payment } from 'src/payments/entities/payment.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-  OneToMany,
-  BeforeInsert,
-} from 'typeorm';
+// import { Payment } from 'src/payments/entities/payment.entity';
+
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,11 +19,11 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: true })
+  @Column('boolean')
   isActive: boolean;
 
   // @OneToMany((type) => Payment, (payment) => payment.id)
-  // @JoinColumn()
+  // @JoinColumn
   // payments: number[];
 
   @BeforeInsert()

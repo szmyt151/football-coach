@@ -1,4 +1,4 @@
-import { User } from 'src/users/entities/user.entity';
+import { Users } from 'src/users/entities/user.entity';
 import {
   Column,
   Entity,
@@ -25,7 +25,7 @@ export class Payment {
   @Column('enum', { enum: PaymentTypeEnum })
   paymentType: string;
 
-  @OneToOne((type) => User, (user) => user.id)
-  @JoinColumn()
-  user: number;
+  // @OneToOne((type) => Users, (user) => user.id)
+  // @JoinColumn()
+  // user: number;
 }

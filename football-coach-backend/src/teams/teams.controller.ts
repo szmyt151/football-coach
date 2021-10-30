@@ -10,6 +10,7 @@ import {
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { Logger } from '@nestjs/common';
 
 @Controller('teams')
 export class TeamsController {
@@ -17,6 +18,9 @@ export class TeamsController {
 
   @Post()
   create(@Body() createTeamDto: CreateTeamDto) {
+    Logger.log('info', createTeamDto);
+    Logger.warn('warning', createTeamDto);
+    Logger.error('something went wrong! ', createTeamDto);
     return this.teamsService.create(createTeamDto);
   }
 

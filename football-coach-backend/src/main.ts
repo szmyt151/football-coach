@@ -1,9 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, {
+    logger: Logger,
+    cors: true,
+    bodyParser: true,
+  });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: false,
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Football Coach')
@@ -14,6 +25,19 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  Logger.log('info');
+  Logger.warn('warning');
+  Logger.error('something went wrong! ');
+  await app.listen(8888, () => {
+    Logger.log(`Listening on http://localhost:8888`);
+  });
+  Logger.log(`Listening on http://localhost:8888`);
 }
-bootstrap();
+
+bootstrap()
+  .then(() => {
+    console.log('Satrted');
+  })
+  .catch((err) => {
+    console.log(err);
+  });

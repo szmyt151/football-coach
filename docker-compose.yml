@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  # backend: 
+  # backend:
   #   image: footbalcoach_backend
   #   build:
   #      context: ./football-coach-backend
@@ -9,7 +9,7 @@ services:
   #     - ./football-coach-backend
   #   ports:
   #     - 3000:3000
-  
+
   # frontend:
   #   image: footbalcoach_frontend
   #   build:
@@ -17,6 +17,37 @@ services:
   #      dockerfile: Dockerfile.frontend
   #   ports:
   #     - 3001:3000
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: db:3306
+      MYSQL_ROOT_PASSWORD: studentpassword 
+    networks:
+      - wpsite
+      - external
+
+  # Database
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: studentpassword
+      MYSQL_DATABASE: footballCoach
+      MYSQL_USER: student
+      MYSQL_PASSWORD: studentpassword
+    networks:
+      - wpsite
+      - external
 
   postgres:
     image: postgres:14
@@ -26,16 +57,36 @@ services:
       - POSTGRES_PASSWORD=studentpassword
       - POSTGRES_DB=footballCoach
     ports:
-      - '5432:5432'
-    volumes: 
+      - "5432:5432"
+    volumes:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
+      - external
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - '8000:80'
+    restart: always
+    volumes: ['./wordpress:/var/www/html']
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    networks:
+      - wpsite
       - external
 
 volumes:
   postgres-data2:
     driver: local
+  db_data:
+    driver: local
 
 networks:
+  wpsite:
   external:
     driver: bridge

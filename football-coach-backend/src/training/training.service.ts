@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
@@ -8,7 +7,7 @@ import { Training } from './entities/training.entity';
 @Injectable()
 export class TrainingService {
   constructor(
-    @InjectRepository(Training)
+    @Inject('TRAINING_REPOSITORY')
     private trainingRepository: Repository<Training>,
   ) {}
   findAll(): Promise<Training[]> {
