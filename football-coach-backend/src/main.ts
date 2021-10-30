@@ -5,7 +5,6 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: Logger,
     cors: true,
     bodyParser: true,
   });
@@ -16,22 +15,16 @@ async function bootstrap() {
     }),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('Football Coach')
-    .setDescription('Football coach API description')
-    .setVersion('1.0')
-    .addTag('footballCoach')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // const config = new DocumentBuilder()
+  //   .setTitle('Football Coach')
+  //   .setDescription('Football coach API description')
+  //   .setVersion('1.0')
+  //   .addTag('footballCoach')
+  //   .build();
+  // const document = SwaggerModule.createDocument(app, config);
+  // SwaggerModule.setup('api', app, document);
 
-  Logger.log('info');
-  Logger.warn('warning');
-  Logger.error('something went wrong! ');
-  await app.listen(8888, () => {
-    Logger.log(`Listening on http://localhost:8888`);
-  });
-  Logger.log(`Listening on http://localhost:8888`);
+  await app.listen(30000);
 }
 
 bootstrap()

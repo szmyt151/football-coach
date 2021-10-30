@@ -2,7 +2,7 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
-import { Users } from './entities/user.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -10,21 +10,21 @@ export class UsersService {
 
   constructor(
     @Inject('USER_REPOSITORY')
-    private usersRepository: Repository<Users>,
+    private usersRepository: Repository<User>,
   ) {
     this.logger = new Logger();
   }
 
-  findOneByUsername(username: string): Promise<Users> {
+  findOneByUsername(username: string): Promise<User> {
     return this.usersRepository.findOne(username);
   }
 
-  public findAll(): Promise<Users[]> {
+  public findAll(): Promise<User[]> {
     this.logger.log('create something...');
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<Users> {
+  findOne(id: number): Promise<User> {
     return this.usersRepository.findOne(id);
   }
 

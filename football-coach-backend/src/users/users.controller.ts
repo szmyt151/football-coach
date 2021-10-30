@@ -23,8 +23,7 @@ export class UsersController {
   @ApiForbiddenResponse({ description: 'Forbidden.' })
   async create(@Body() createUserDto: CreateUserDto) {
     console.log({ createUserDto });
-    //await this.usersService.create(createUserDto);
-    return { xd: 1 };
+    return await this.usersService.create(createUserDto);
   }
 
   @Get()

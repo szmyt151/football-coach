@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { Users } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import { createConnection } from 'typeorm';
 
 export const databaseProviders = [
