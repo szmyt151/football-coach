@@ -8,6 +8,9 @@ import { TeamMatchesModule } from "./team-matches/team-matches.module";
 import { TeamsModule } from "./teams/teams.module";
 import { TrainingModule } from "./training/training.module";
 import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { APP_GUARD } from "@nestjs/core";
 
 @Module({
   imports: [
@@ -29,6 +32,13 @@ import { UsersModule } from "./users/users.module";
     PlayersModule,
     PlayerStatisticsModule,
     PaymentsModule,
+    AuthModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
 })
 export class AppModule {}
