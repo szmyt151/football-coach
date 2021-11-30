@@ -5,7 +5,7 @@ const instance = axios.create({
     headers: {'Authorization': `Bearer ${localStorage.getItem('access_token')}`}
   });
 
-instance.interceptors.response.use(function (response) {
+axios.interceptors.response.use(function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response;

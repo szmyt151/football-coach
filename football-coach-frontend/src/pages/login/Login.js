@@ -10,14 +10,12 @@ import {
   Fade,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
 
 // logo
 import logo from "./logo.svg";
-import google from "../../images/google.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -52,7 +50,7 @@ function Login(props) {
             centered
           >
             <Tab label="Login" classes={{ root: classes.tab }} />
-            <Tab label="New User" classes={{ root: classes.tab }} />
+            {/* <Tab label="New User" classes={{ root: classes.tab }} /> */}
           </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
@@ -119,13 +117,6 @@ function Login(props) {
                     Login
                   </Button>
                 )}
-                {/* <Button
-                  color="primary"
-                  size="large"
-                  className={classes.forgetButton}
-                >
-                  Forget Password
-                </Button> */}
               </div>
             </React.Fragment>
           )}

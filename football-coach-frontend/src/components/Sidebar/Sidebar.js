@@ -57,10 +57,10 @@ const structure = [
       { label: "Maps", link: "/app/ui/maps" },
     ],
   },
-  
-  { id: 2, label: "Users", link: "/app/users", icon: <PeopleIcon /> },
+
+  { id: 2, label: "Admins", link: "/app/users", icon: <PeopleIcon /> },
   { id: 3, label: "Payments", link: "/app/payment", icon: <PaymentIcon /> },
-  { id: 4, label: "Players", link: "/app/players", icon: <SportsSoccerIcon /> },
+  { id: 4, label: "Players", link: "/app/players", icon: <PeopleIcon /> },
 
 ];
 
