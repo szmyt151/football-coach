@@ -1,0 +1,6 @@
+{
+  "name": "PlayersTable",
+  "version": "0.0.0",
+  "main": "PlayersTable.js",
+  "private": true
+}

@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from 'axios'
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
 
@@ -49,19 +49,23 @@ export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
 
 // ###########################################################
 
-function loginUser(dispatch, login, password, history, setIsLoading, setError) {
+async function loginUser(dispatch, login, password, history, setIsLoading, setError) {
   setError(false);
   setIsLoading(true);
 
   if (!!login && !!password) {
-    setTimeout(() => {
-      localStorage.setItem('access_token', 1)
+
+    try {
+      const { data } = await axios.post('/auth/login', {username: login, password})
+
+      localStorage.setItem('access_token', data.access_token)
       setError(null)
       setIsLoading(false)
       dispatch({ type: 'LOGIN_SUCCESS' })
-
       history.push('/app/dashboard')
-    }, 2000);
+    } catch (error) {
+      console.log(error)
+    }
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
     setError(true);

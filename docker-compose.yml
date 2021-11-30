@@ -18,36 +18,36 @@ services:
   #   ports:
   #     - 3001:3000
 
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - '8080:80'
-    environment:
-      PMA_HOST: db:3306
-      MYSQL_ROOT_PASSWORD: studentpassword 
-    networks:
-      - wpsite
-      - external
+  # phpmyadmin:
+  #   depends_on:
+  #     - db
+  #   image: phpmyadmin/phpmyadmin
+  #   restart: always
+  #   ports:
+  #     - '8080:80'
+  #   environment:
+  #     PMA_HOST: db:3306
+  #     MYSQL_ROOT_PASSWORD: studentpassword 
+  #   networks:
+  #     - wpsite
+  #     - external
 
-  # Database
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    ports:
-      - '3306:3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: studentpassword
-      MYSQL_DATABASE: footballCoach
-      MYSQL_USER: student
-      MYSQL_PASSWORD: studentpassword
-    networks:
-      - wpsite
-      - external
+  # # Database
+  # db:
+  #   image: mysql:5.7
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   restart: always
+  #   ports:
+  #     - '3306:3306'
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: studentpassword
+  #     MYSQL_DATABASE: footballCoach
+  #     MYSQL_USER: student
+  #     MYSQL_PASSWORD: studentpassword
+  #   networks:
+  #     - wpsite
+  #     - external
 
   postgres:
     image: postgres:14
@@ -63,22 +63,22 @@ services:
     networks:
       - external
 
-  wordpress:
-    depends_on:
-      - db
-    image: wordpress:latest
-    ports:
-      - '8000:80'
-    restart: always
-    volumes: ['./wordpress:/var/www/html']
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-    networks:
-      - wpsite
-      - external
+  # wordpress:
+  #   depends_on:
+  #     - db
+  #   image: wordpress:latest
+  #   ports:
+  #     - '8000:80'
+  #   restart: always
+  #   volumes: ['./wordpress:/var/www/html']
+  #   environment:
+  #     WORDPRESS_DB_HOST: db:3306
+  #     WORDPRESS_DB_USER: wordpress
+  #     WORDPRESS_DB_PASSWORD: wordpress
+  #     WORDPRESS_DB_PASSWORD: wordpress
+  #   networks:
+  #     - wpsite
+  #     - external
 
 volumes:
   postgres-data2:

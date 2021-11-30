@@ -1,0 +1,6 @@
+{
+  "name": "PaymentTable",
+  "version": "0.0.0",
+  "main": "PaymentTable.js",
+  "private": true
+}

@@ -10,6 +10,9 @@ import {
   LibraryBooks as LibraryIcon,
   HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
+  People as PeopleIcon,
+  Payment as PaymentIcon,
+  SportsSoccer as SportsSoccerIcon,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
@@ -37,15 +40,14 @@ const structure = [
     link: "/app/typography",
     icon: <TypographyIcon />,
   },
-  { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
   {
-    id: 3,
+    id: 5,
     label: "Notifications",
     link: "/app/notifications",
     icon: <NotificationsIcon />,
   },
   {
-    id: 4,
+    id: 6,
     label: "UI Elements",
     link: "/app/ui",
     icon: <UIElementsIcon />,
@@ -55,7 +57,11 @@ const structure = [
       { label: "Maps", link: "/app/ui/maps" },
     ],
   },
-  { id: 5, type: "divider" },
+  
+  { id: 2, label: "Users", link: "/app/users", icon: <PeopleIcon /> },
+  { id: 3, label: "Payments", link: "/app/payment", icon: <PaymentIcon /> },
+  { id: 4, label: "Players", link: "/app/players", icon: <SportsSoccerIcon /> },
+
 ];
 
 function Sidebar({ location }) {
