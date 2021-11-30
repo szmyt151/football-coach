@@ -18,7 +18,6 @@ instance.interceptors.response.use(function (response) {
     if(error.toJSON().status === 401){
         console.log("true")
         localStorage.removeItem('access_token')
-        return window.location.href = '/#/login'
     }
 
     return Promise.reject(error);
