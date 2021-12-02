@@ -1,9 +1,11 @@
+import { User } from "./../../users/entities/user.entity";
 import { Player } from "src/players/entities/player.entity";
 import { Season } from "src/seasons/entities/season.entity";
 import { Training } from "src/training/entities/training.entity";
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -19,6 +21,10 @@ export class Team {
 
   @Column()
   myTeam: boolean;
+
+  @ManyToOne(() => User, (user) => user.id)
+  @JoinColumn()
+  user: User;
 
   @OneToMany(() => Player, (player) => player.id)
   players: number[];

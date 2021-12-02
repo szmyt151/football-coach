@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "../../axios/index";
+import { Favorite as FavoriteIcon } from "@material-ui/icons";
+import CustomTable from "../../components/Table/CustomTable";
 
 const columns = [
     {
@@ -12,6 +11,7 @@ const columns = [
         options: {
             filter: true,
             sort: true,
+            display: false,
         },
     },
     {
@@ -20,6 +20,15 @@ const columns = [
         options: {
             filter: true,
             sort: false,
+        },
+    },
+    {
+        label: "MyTeam",
+        name: "myTeam",
+        options: {
+            customBodyRender: (data, ...args) => {
+                return <div>{data ? <FavoriteIcon /> : null}</div>;
+            },
         },
     },
 ];
@@ -37,25 +46,5 @@ export default function TeamTables() {
         fetchTeams();
     }, []);
 
-    return (
-        <>
-            <PageTitle title="Teams" />
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <MUIDataTable
-                        title="Teams"
-                        data={teams}
-                        columns={columns}
-                        options={{
-                            filterType: "checkbox",
-                            download: false,
-                            print: false,
-                            viewColumns: false,
-                            filter: false,
-                        }}
-                    />
-                </Grid>
-            </Grid>
-        </>
-    );
+    return <CustomTable title="Teams" columns={columns} rows={teams} />;
 }

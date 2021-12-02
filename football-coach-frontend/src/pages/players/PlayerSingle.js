@@ -23,7 +23,7 @@ export default function PlayerSingle(props) {
         };
 
         fetchPlayer();
-    });
+    }, []);
 
     return (
         <>
@@ -41,6 +41,9 @@ export default function PlayerSingle(props) {
                             </Typography>
                             <Typography variant="h5" component="div">
                                 {player.firstName} {player.lastName}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                {player.nationality}
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 Age: {getAge(player.birth)}

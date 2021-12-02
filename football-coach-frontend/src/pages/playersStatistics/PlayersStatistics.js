@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { TextField, CircularProgress, Autocomplete } from "@mui/material";
-import PlayerCard from "../../components/Players/PlayerCard";
-// import MUIDataTable from "mui-datatables";
-// import TextField from "@mui/material/TextField";
-// import Autocomplete from "@mui/material/Autocomplete";
-// import CircularProgress from "@mui/material/CircularProgress";
-
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "../../axios";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import PlayerCard from "../../components/Players/PlayerCard";
 
 export default function PlayersStatistics() {
     const [open, setOpen] = useState(false);
@@ -36,16 +31,9 @@ export default function PlayersStatistics() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading]);
 
-    // useEffect(() => {
-    //     if (!open) {
-    //         setOptions([]);
-    //     }
-    // }, [open]);
-
     useEffect(() => {
         const fetchPlayers = async () => {
             axios.get("/players").then((data) => {
-                console.log({ data });
                 setOptions(data.data);
             });
         };
@@ -96,15 +84,11 @@ export default function PlayersStatistics() {
             )}
 
             <PageTitle title="Players" />
-            <Grid
-                container
-                spacing={{ xs: 1, md: 3 }}
-                columns={{ xs: 6, sm: 8, md: 12 }}
-            >
+            <Grid container spacing={2}>
                 {options &&
                     options.map((player) => {
                         return (
-                            <Grid key={player.id} item xs={1} sm={4} md={2}>
+                            <Grid item md key={player.id}>
                                 <PlayerCard player={player} />
                             </Grid>
                         );

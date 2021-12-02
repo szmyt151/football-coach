@@ -9,6 +9,7 @@ import {
   ManyToMany,
   OneToMany,
   OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -19,6 +20,7 @@ export enum PlayerPositionEnum {
   LB = "LB - Left Back",
   LM = "LM - Left Midfielder",
   RM = "RM - Right Midfielder",
+  CDM = "CDM - Center Defender Midfielder",
   CM = "CM - Center Midfielder",
   CAM = "CAM - Center Attacker Midfielder",
   RW = "RW - Right Winger",
@@ -46,6 +48,9 @@ export class Player {
   @Column()
   lastName: string;
 
+  @Column({ nullable: true })
+  nationality: string;
+
   @Column()
   birth: Date;
 
@@ -58,7 +63,7 @@ export class Player {
   @Column()
   teamId: number;
 
-  @OneToOne(() => Team, (team) => team.id)
+  @ManyToOne(() => Team, (team) => team.id)
   @JoinColumn()
   team: Team;
 

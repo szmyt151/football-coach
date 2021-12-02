@@ -1,15 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import classnames from "classnames";
-import { Box, IconButton, Link } from "@material-ui/core";
-import Icon from "@mdi/react";
-
-//icons
-import {
-    mdiFacebook as FacebookIcon,
-    mdiTwitter as TwitterIcon,
-    mdiGithub as GithubIcon,
-} from "@mdi/js";
 
 // styles
 import useStyles from "./styles";
@@ -17,6 +8,7 @@ import useStyles from "./styles";
 // components
 import Header from "../Header";
 import Sidebar from "../Sidebar";
+import BasicSpeedDial from "../SpeedDial/SpeedDial";
 
 // pages
 import Dashboard from "../../pages/dashboard";
@@ -34,7 +26,6 @@ import Charts from "../../pages/charts";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 import PlayersStatistics from "../../pages/playersStatistics/PlayersStatistics";
-
 function Layout(props) {
     var classes = useStyles();
 
@@ -111,6 +102,7 @@ function Layout(props) {
                         <Route path="/app/ui/icons" component={Icons} />
                         <Route path="/app/ui/charts" component={Charts} />
                     </Switch>
+                    <BasicSpeedDial />
                 </div>
             </>
         </div>

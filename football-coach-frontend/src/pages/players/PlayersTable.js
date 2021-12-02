@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
-import { getAge } from "../../components/Players/helpers";
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "../../axios";
+import CustomTable from "../../components/Table/CustomTable";
+import { getAge } from "../../components/Players/helpers";
 
 const columns = [
     {
@@ -76,28 +74,5 @@ export default function PlayersTable() {
         fetchPlayers();
     }, []);
 
-    return (
-        <>
-            <PageTitle title="Players" />
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <MUIDataTable
-                        title="Players"
-                        data={rows}
-                        columns={columns}
-                        options={{
-                            download: false,
-                            print: false,
-                            viewColumns: false,
-                            filter: false,
-                            selectableRows: "single",
-                            selectedRows: {
-                                text: "row(s) selected",
-                            },
-                        }}
-                    />
-                </Grid>
-            </Grid>
-        </>
-    );
+    return <CustomTable title="Players" columns={columns} rows={rows} />;
 }
