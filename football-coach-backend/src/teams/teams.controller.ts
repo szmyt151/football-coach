@@ -6,21 +6,21 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { TeamsService } from './teams.service';
-import { CreateTeamDto } from './dto/create-team.dto';
-import { UpdateTeamDto } from './dto/update-team.dto';
-import { Logger } from '@nestjs/common';
+} from "@nestjs/common";
+import { TeamsService } from "./teams.service";
+import { CreateTeamDto } from "./dto/create-team.dto";
+import { UpdateTeamDto } from "./dto/update-team.dto";
+import { Logger } from "@nestjs/common";
 
-@Controller('teams')
+@Controller("teams")
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Post()
   create(@Body() createTeamDto: CreateTeamDto) {
-    Logger.log('info', createTeamDto);
-    Logger.warn('warning', createTeamDto);
-    Logger.error('something went wrong! ', createTeamDto);
+    Logger.log("info", createTeamDto);
+    Logger.warn("warning", createTeamDto);
+    Logger.error("something went wrong! ", createTeamDto);
     return this.teamsService.create(createTeamDto);
   }
 
@@ -29,18 +29,18 @@ export class TeamsController {
     return this.teamsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: number) {
     return this.teamsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
+  @Patch(":id")
+  update(@Param("id") id: number, @Body() updateTeamDto: UpdateTeamDto) {
     return this.teamsService.update(+id, updateTeamDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: number) {
     return this.teamsService.remove(+id);
   }
 }

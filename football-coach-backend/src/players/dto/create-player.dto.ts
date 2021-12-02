@@ -17,8 +17,8 @@ export class CreatePlayerDto {
   playerPosition: string;
 
   @ApiProperty()
-  team: number;
+  teamId: number;
 
-  @ApiProperty()
-  playerStatistics: number[];
+  // @ApiProperty()
+  // playerStatistics: number[];
 }

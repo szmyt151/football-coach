@@ -55,18 +55,21 @@ export class Player {
   @Column("enum", { enum: PlayerPositionEnum })
   playerPosition: string;
 
-  @OneToOne((type) => Team, (team) => team.id)
+  @Column()
+  teamId: number;
+
+  @OneToOne(() => Team, (team) => team.id)
   @JoinColumn()
-  team: number;
+  team: Team;
 
   @OneToMany(
     (type) => PlayerStatistic,
     (playerStatistic) => playerStatistic.player
   )
   @JoinTable()
-  playerStatistics: number[];
+  playerStatistics: PlayerStatistic[];
 
   @ManyToMany((type) => Training, (training) => training.id)
   @JoinTable()
-  trainings: number[];
+  trainings: Training[];
 }

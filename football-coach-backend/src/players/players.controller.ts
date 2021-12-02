@@ -32,8 +32,17 @@ export class PlayersController {
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.playersService.findOne(+id);
+  async findOne(@Param("id") id: number) {
+    const data = await this.playersService.findOne(id);
+    console.log({ data });
+    return data;
+  }
+
+  @Get("/team/:teamid")
+  async findPlayersByTeam(@Param("teamid") id: number) {
+    const data = await this.playersService.findPlayersByTeam(id);
+    console.log({ data });
+    return data;
   }
 
   @Patch(":id")

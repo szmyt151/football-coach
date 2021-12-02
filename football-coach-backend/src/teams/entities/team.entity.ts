@@ -20,12 +20,12 @@ export class Team {
   @Column()
   myTeam: boolean;
 
-  @OneToMany((type) => Player, (player) => player.id)
+  @OneToMany(() => Player, (player) => player.id)
   players: number[];
 
-  @OneToMany((type) => Training, (training) => training.id)
+  @OneToMany(() => Training, (training) => training.id)
   trainings: number[];
 
-  @ManyToOne((type) => Season, (season) => season.id)
+  @ManyToOne(() => Season, (season) => season.id)
   seasons: number[];
 }
