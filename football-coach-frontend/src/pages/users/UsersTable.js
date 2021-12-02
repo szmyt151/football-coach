@@ -35,13 +35,9 @@ const columns = [
 
 
 export default function UsersTables() {
-
   const [rows, setRows] = useState([])
 
-
   useEffect(() => {
-
-
     fetchUsers(useUsersDispatch, setRows)
   }, [])
 

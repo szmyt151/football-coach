@@ -1,20 +1,15 @@
 import React from "react";
-import {
-  Route,
-  Switch,
-  Redirect,
-  withRouter,
-} from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import classnames from "classnames";
-import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
+import { Box, IconButton, Link } from "@material-ui/core";
+import Icon from "@mdi/react";
 
 //icons
 import {
-  mdiFacebook as FacebookIcon,
-  mdiTwitter as TwitterIcon,
-  mdiGithub as GithubIcon,
-} from '@mdi/js'
+    mdiFacebook as FacebookIcon,
+    mdiTwitter as TwitterIcon,
+    mdiGithub as GithubIcon,
+} from "@mdi/js";
 
 // styles
 import useStyles from "./styles";
@@ -30,50 +25,96 @@ import Notifications from "../../pages/notifications";
 import Maps from "../../pages/maps";
 import UsersTables from "../../pages/users";
 import PaymentTable from "../../pages/payment";
-import PlayersTable from "../../pages/players";
+import PlayersTable from "../../pages/players/PlayersTable";
+import TeamsTable from "../../pages/teams/TeamsTable";
+import PlayerSingle from "../../pages/players/PlayerSingle";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
+import PlayersStatistics from "../../pages/playersStatistics/PlayersStatistics";
 
 function Layout(props) {
-  var classes = useStyles();
+    var classes = useStyles();
 
-  // global
-  var layoutState = useLayoutState();
+    // global
+    var layoutState = useLayoutState();
 
-  return (
-    <div className={classes.root}>
-        <>
-          <Header history={props.history} />
-          <Sidebar />
-          <div
-            className={classnames(classes.content, {
-              [classes.contentShift]: layoutState.isSidebarOpened,
-            })}
-          >
-            <div className={classes.fakeToolbar} />
-            <Switch>
-              <Route path="/app/dashboard" component={Dashboard} />
-              <Route path="/app/typography" component={Typography} />
-              <Route path="/app/users" component={UsersTables} />
-              <Route path="/app/payment" component={PaymentTable} />
-              <Route path="/app/players" component={PlayersTable} />
-              <Route path="/app/notifications" component={Notifications} />
-              <Route
-                exact
-                path="/app/ui"
-                render={() => <Redirect to="/app/ui/icons" />}
-              />
-              <Route path="/app/ui/maps" component={Maps} />
-              <Route path="/app/ui/icons" component={Icons} />
-              <Route path="/app/ui/charts" component={Charts} />
-            </Switch>
-          </div>
-        </>
-    </div>
-  );
+    return (
+        <div className={classes.root}>
+            <>
+                <Header history={props.history} />
+                <Sidebar />
+                <div
+                    className={classnames(classes.content, {
+                        [classes.contentShift]: layoutState.isSidebarOpened,
+                    })}
+                >
+                    <div className={classes.fakeToolbar} />
+                    <Switch>
+                        <Route path="/app/dashboard" component={Dashboard} />
+                        <Route path="/app/typography" component={Typography} />
+                        <Route
+                            path="/app/notifications"
+                            component={Notifications}
+                        />
+                        <Route
+                            exact
+                            path="/app/ui"
+                            render={() => <Redirect to="/app/ui/icons" />}
+                        />
+
+                        <Route path="/app/users" component={UsersTables} />
+                        <Route
+                            path="/app/users/:userid"
+                            component={UsersTables}
+                        />
+
+                        <Route path="/app/payment" component={PaymentTable} />
+                        <Route
+                            path="/app/payment:paymentid"
+                            component={PaymentTable}
+                        />
+
+                        <Route
+                            exact
+                            path="/app/players"
+                            component={PlayersTable}
+                        />
+                        <Route
+                            path="/app/players/:playerid"
+                            component={PlayerSingle}
+                        />
+
+                        <Route
+                            exact
+                            path="/app/statistics"
+                            component={PlayersStatistics}
+                        />
+
+                        {/* <Route exact path="/app/matches" component={Matches} /> */}
+                        <Route
+                            path="/app/matches/:matchid"
+                            component={PlayersStatistics}
+                        />
+
+                        {/* <Route path="/app/statistics/:playerid" component={PlayersStatisticsSingle} /> */}
+
+                        <Route exact path="/app/teams" component={TeamsTable} />
+                        <Route
+                            path="/app/teams/:teamid"
+                            component={TeamsTable}
+                        />
+
+                        <Route path="/app/ui/maps" component={Maps} />
+                        <Route path="/app/ui/icons" component={Icons} />
+                        <Route path="/app/ui/charts" component={Charts} />
+                    </Switch>
+                </div>
+            </>
+        </div>
+    );
 }
 
 export default withRouter(Layout);

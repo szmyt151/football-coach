@@ -5,6 +5,8 @@ var UsersDispatchContext = React.createContext();
 
 function usersReducer(state, action) {
   switch (action.type) {
+    case 'GET_USERS':
+      return state.users;
     case "USERS_FETCHED":
       return { ...state, users: action.payload };
     default: {
