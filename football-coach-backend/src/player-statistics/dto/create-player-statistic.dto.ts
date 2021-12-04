@@ -1,4 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Player } from "src/players/entities/player.entity";
+import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 
 export class CreatePlayerStatisticDto {
   @ApiProperty()
@@ -17,8 +19,8 @@ export class CreatePlayerStatisticDto {
   redCards: number;
 
   @ApiProperty()
-  player: number;
+  player: Player[];
 
   @ApiProperty()
-  teamMatch: number;
+  teamMatch: TeamMatch[];
 }

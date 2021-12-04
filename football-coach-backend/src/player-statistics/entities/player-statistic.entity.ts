@@ -3,6 +3,7 @@ import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -13,11 +14,13 @@ export class PlayerStatistic {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @JoinColumn()
   @ManyToOne((type) => TeamMatch, (teamMatch) => teamMatch.id)
-  teamMatch: number;
+  teamMatch: TeamMatch[];
 
+  @JoinColumn()
   @ManyToOne((type) => Player, (player) => player.id)
-  player: number;
+  player: Player[];
 
   @Column()
   goals: number;

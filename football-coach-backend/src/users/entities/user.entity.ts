@@ -1,10 +1,12 @@
 import { Payment } from "src/payments/entities/payment.entity";
+import { Team } from "src/teams/entities/team.entity";
 import {
   BeforeInsert,
   Column,
   Entity,
   JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -30,7 +32,11 @@ export class User {
 
   @OneToMany((type) => Payment, (payment) => payment.id)
   @JoinColumn()
-  payments: number[];
+  payments: Payment[];
+
+  @JoinColumn()
+  @OneToOne((type) => Team, (team) => team.id)
+  team: Team;
 
   @BeforeInsert()
   async setPassword(password: string) {

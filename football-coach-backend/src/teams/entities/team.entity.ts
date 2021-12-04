@@ -1,3 +1,4 @@
+import { TeamMatch } from "./../../team-matches/entities/team-match.entity";
 import { User } from "./../../users/entities/user.entity";
 import { Player } from "src/players/entities/player.entity";
 import { Season } from "src/seasons/entities/season.entity";
@@ -24,14 +25,21 @@ export class Team {
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn()
-  user: User;
+  userId: User;
 
-  @OneToMany(() => Player, (player) => player.id)
-  players: number[];
+  @JoinColumn()
+  @OneToMany(() => Player, (player) => player.team)
+  players: Player[];
 
-  @OneToMany(() => Training, (training) => training.id)
-  trainings: number[];
+  @JoinColumn()
+  @OneToMany(() => Training, (training) => training.team)
+  trainings: Training[];
 
+  @JoinColumn()
   @ManyToOne(() => Season, (season) => season.id)
-  seasons: number[];
+  seasons: Season[];
+
+  @JoinColumn()
+  @ManyToOne(() => TeamMatch, (teamMatch) => teamMatch.team)
+  teamMatches: TeamMatch[];
 }

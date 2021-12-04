@@ -34,6 +34,12 @@ export class TeamMatch {
   @Column("enum", { enum: TeamMatchResultEnum })
   matchResult: string;
 
+  @Column()
+  scoreHome: number;
+
+  @Column()
+  scoreAway: number;
+
   @Column("enum", { enum: HomeAwayEnum })
   homeAway: string;
 
@@ -47,5 +53,5 @@ export class TeamMatch {
 
   @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id)
   @JoinColumn()
-  playerStatistics: number[];
+  playerStatistics: PlayerStatistic[];
 }

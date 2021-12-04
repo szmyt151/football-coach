@@ -13,11 +13,14 @@ export class TeamsService {
   ) {}
 
   findAll(): Promise<Team[]> {
-    return this.teamRepository.find();
+    return this.teamRepository.find({ relations: ["userId"] });
   }
 
   findOne(id: number): Promise<Team> {
-    return this.teamRepository.findOne(id);
+    return this.teamRepository.findOne({
+      where: { id },
+      relations: ["userId", "players", "seasons", "teamMatches", "trainings"],
+    });
   }
 
   async remove(id: number): Promise<void> {
