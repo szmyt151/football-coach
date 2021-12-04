@@ -3,7 +3,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import { Edit as EditIcon } from "@material-ui/icons";
+import {
+    Edit as EditIcon,
+    ArrowForward as ArrowForwardIcon,
+} from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
 const defaultToolbarSelectStyles = {
@@ -19,22 +22,26 @@ const defaultToolbarSelectStyles = {
 };
 
 class CustomToolbarSelect extends React.Component {
-    handleEditClick = () => {
-        console.log("click! current selected rows", this.props);
-    };
-    handleDeleteClick = () => {
-        console.log("click! current selected rows", this.props);
-    };
-
     render() {
-        const { classes } = this.props;
+        const {
+            classes,
+            handleEditClick,
+            handleDeleteClick,
+            selectedRows,
+            selectedRowData,
+        } = this.props;
 
         return (
             <div className={"custom-toolbar-select"}>
                 <Tooltip title={"Edit"}>
                     <IconButton
                         className={classes.iconButton}
-                        onClick={this.handleEditClick}
+                        onClick={(e) =>
+                            handleEditClick(e, {
+                                selectedRows,
+                                selectedRowData,
+                            })
+                        }
                     >
                         <EditIcon className={classes.deleteIcon} />
                     </IconButton>
@@ -42,9 +49,28 @@ class CustomToolbarSelect extends React.Component {
                 <Tooltip title={"Delete"}>
                     <IconButton
                         className={classes.iconButton}
-                        onClick={this.handleDeleteClick}
+                        onClick={(e) =>
+                            handleDeleteClick(e, {
+                                selectedRows,
+                                selectedRowData,
+                            })
+                        }
                     >
                         <DeleteIcon className={classes.deleteIcon} />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title={"Show more"}>
+                    <IconButton
+                        className={classes.iconButton}
+                        onClick={(e) =>
+                            handleDeleteClick(e, {
+                                selectedRows,
+                                selectedRowData,
+                            })
+                        }
+                    >
+                        <ArrowForwardIcon className={classes.deleteIcon} />
                     </IconButton>
                 </Tooltip>
             </div>

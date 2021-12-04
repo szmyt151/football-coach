@@ -3,10 +3,20 @@ import React, { useState, useEffect } from "react";
 import axios from "../../axios/index";
 import { Favorite as FavoriteIcon } from "@material-ui/icons";
 import CustomTable from "../../components/Table/CustomTable";
+import { withRouter } from "react-router-dom";
 
 const columns = [
     {
         name: "id",
+        label: "Number ID",
+        options: {
+            filter: true,
+            sort: true,
+            display: false,
+        },
+    },
+    {
+        name: "userId",
         label: "Number ID",
         options: {
             filter: true,
@@ -33,7 +43,7 @@ const columns = [
     },
 ];
 
-export default function TeamTables() {
+function TeamTables(props) {
     const [teams, setTeams] = useState([]);
 
     useEffect(() => {
@@ -46,5 +56,29 @@ export default function TeamTables() {
         fetchTeams();
     }, []);
 
-    return <CustomTable title="Teams" columns={columns} rows={teams} />;
+    const handleEditClick = (e, payload) => {
+        console.log("handleEditClick", { e, payload });
+        console.log("handleEditClick", { props });
+        props.history.push({
+            pathname: `/app/teams/${payload.selectedRowData.id}`,
+            state: { team: payload.selectedRowData },
+        });
+    };
+
+    const handleDeleteClick = (...args) => {
+        console.log("handleEditClick", { args });
+        console.log("handleDeleteClick", { props });
+    };
+
+    return (
+        <CustomTable
+            title="Teams"
+            columns={columns}
+            rows={teams}
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+        />
+    );
 }
+
+export default withRouter(TeamTables);

@@ -19,6 +19,7 @@ import UsersTables from "../../pages/users";
 import PaymentTable from "../../pages/payment";
 import PlayersTable from "../../pages/players/PlayersTable";
 import TeamsTable from "../../pages/teams/TeamsTable";
+import TeamSingle from "../../pages/teams/TeamSingle";
 import PlayerSingle from "../../pages/players/PlayerSingle";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
@@ -95,7 +96,7 @@ function Layout(props) {
                         <Route exact path="/app/teams" component={TeamsTable} />
                         <Route
                             path="/app/teams/:teamid"
-                            component={TeamsTable}
+                            component={TeamSingle}
                         />
 
                         <Route path="/app/ui/maps" component={Maps} />

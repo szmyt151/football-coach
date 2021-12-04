@@ -30,7 +30,7 @@ export default function BasicSpeedDial() {
     return (
         <SpeedDial
             ariaLabel="Add player and match"
-            sx={{ position: "absolute", bottom: 16, right: 16 }}
+            sx={{ position: "fixed", bottom: 16, right: 16 }}
             icon={<SpeedDialIcon />}
         >
             <SpeedDialAction
