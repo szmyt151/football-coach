@@ -53,6 +53,9 @@ class CustomTable extends React.Component {
                                         handleDeleteClick={
                                             this.props.handleDeleteClick
                                         }
+                                        handleShowMoreClick={
+                                            this.props.handleShowMoreClick
+                                        }
                                     />
                                 ),
                             }}

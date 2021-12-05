@@ -27,6 +27,7 @@ import Charts from "../../pages/charts";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 import PlayersStatistics from "../../pages/playersStatistics/PlayersStatistics";
+import MatchesTable from "../../pages/matches/MatchesTable";
 function Layout(props) {
     var classes = useStyles();
 
@@ -85,11 +86,15 @@ function Layout(props) {
                             component={PlayersStatistics}
                         />
 
-                        {/* <Route exact path="/app/matches" component={Matches} /> */}
                         <Route
-                            path="/app/matches/:matchid"
-                            component={PlayersStatistics}
+                            exact
+                            path="/app/matches"
+                            component={MatchesTable}
                         />
+                        {/* <Route
+                            path="/app/matches/:matchid"
+                            component={MatchSingle}
+                        /> */}
 
                         {/* <Route path="/app/statistics/:playerid" component={PlayersStatisticsSingle} /> */}
 

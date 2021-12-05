@@ -1,15 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreatePlayerStatisticDto } from './dto/create-player-statistic.dto';
-import { UpdatePlayerStatisticDto } from './dto/update-player-statistic.dto';
-import { PlayerStatistic } from './entities/player-statistic.entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreatePlayerStatisticDto } from "./dto/create-player-statistic.dto";
+import { UpdatePlayerStatisticDto } from "./dto/update-player-statistic.dto";
+import { PlayerStatistic } from "./entities/player-statistic.entity";
 
 @Injectable()
 export class PlayerStatisticsService {
   constructor(
     @InjectRepository(PlayerStatistic)
-    private playerStatisticRepository: Repository<PlayerStatistic>,
+    private playerStatisticRepository: Repository<PlayerStatistic>
   ) {}
 
   findAll(): Promise<PlayerStatistic[]> {

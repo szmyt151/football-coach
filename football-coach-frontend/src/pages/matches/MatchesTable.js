@@ -33,7 +33,7 @@ const columns = [
         },
     },
     {
-        label: "My Team",
+        label: "MyTeam",
         name: "myTeam",
         options: {
             customBodyRender: (data, ...args) => {
@@ -43,46 +43,47 @@ const columns = [
     },
 ];
 
-function TeamTables(props) {
-    const [teams, setTeams] = useState([]);
+function MatchesTable(props) {
+    const [teamsMatches, setTeamsMatches] = useState([]);
 
     useEffect(() => {
-        const fetchTeams = async () => {
-            axios.get("/teams").then((data) => {
-                setTeams(data.data);
+        const fetchTeamsMatches = async () => {
+            axios.get("/team-matches").then((data) => {
+                setTeamsMatches(data.data);
             });
         };
 
-        fetchTeams();
+        fetchTeamsMatches();
     }, []);
+
+    const handleShowMoreClick = (e, payload) => {
+        console.log("handleShowMoreClick", { e, payload });
+        console.log("handleShowMoreClick", { props });
+        props.history.push({
+            pathname: `/app/matches/${payload.selectedRowData.id}`,
+            state: { team: payload.selectedRowData },
+        });
+    };
 
     const handleEditClick = (e, payload) => {
         console.log("handleEditClick", { e, payload });
         console.log("handleEditClick", { props });
         props.history.push({
-            pathname: `/app/teams/${payload.selectedRowData.id}`,
-            state: { team: payload.selectedRowData },
-        });
-    };
-    const handleShowMoreClick = (e, payload) => {
-        console.log("handleShowMoreClick", { e, payload });
-        console.log("handleShowMoreClick", { props });
-        props.history.push({
-            pathname: `/app/teams/${payload.selectedRowData.id}`,
+            pathname: `/app/matches/${payload.selectedRowData.id}`,
             state: { team: payload.selectedRowData },
         });
     };
 
     const handleDeleteClick = (...args) => {
-        console.log("handleEditClick", { args });
+        console.log("handleDeleteClick", { args });
         console.log("handleDeleteClick", { props });
     };
 
     return (
         <CustomTable
-            title="Teams"
+            title="Matches"
             columns={columns}
-            rows={teams}
+            rows={teamsMatches}
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
@@ -90,4 +91,4 @@ function TeamTables(props) {
     );
 }
 
-export default withRouter(TeamTables);
+export default withRouter(MatchesTable);

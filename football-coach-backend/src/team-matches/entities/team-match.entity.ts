@@ -1,9 +1,11 @@
+import { Season } from "src/seasons/entities/season.entity";
 import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
 import { Team } from "src/teams/entities/team.entity";
 import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -31,25 +33,23 @@ export class TeamMatch {
   @Column()
   opponent: string;
 
-  @Column("enum", { enum: TeamMatchResultEnum })
-  matchResult: string;
-
   @Column()
   scoreHome: number;
 
   @Column()
   scoreAway: number;
 
-  @Column("enum", { enum: HomeAwayEnum })
-  homeAway: string;
+  @ManyToOne((type) => Season, (season) => season.id)
+  @JoinColumn()
+  season: Season;
 
   @OneToOne((type) => Team, (team) => team.id)
   @JoinColumn()
-  team: number;
+  homeTeam: Team;
 
   @OneToOne((type) => Team, (team) => team.id)
   @JoinColumn()
-  oponentInDatabase: number;
+  awayTeam: Team;
 
   @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id)
   @JoinColumn()

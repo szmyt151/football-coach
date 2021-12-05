@@ -29,6 +29,7 @@ class CustomToolbarSelect extends React.Component {
             handleDeleteClick,
             selectedRows,
             selectedRowData,
+            handleShowMoreClick,
         } = this.props;
 
         return (
@@ -64,7 +65,7 @@ class CustomToolbarSelect extends React.Component {
                     <IconButton
                         className={classes.iconButton}
                         onClick={(e) =>
-                            handleDeleteClick(e, {
+                            handleShowMoreClick(e, {
                                 selectedRows,
                                 selectedRowData,
                             })

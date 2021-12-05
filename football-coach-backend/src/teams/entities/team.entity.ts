@@ -7,6 +7,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -40,6 +41,9 @@ export class Team {
   seasons: Season[];
 
   @JoinColumn()
-  @ManyToOne(() => TeamMatch, (teamMatch) => teamMatch.team)
+  @OneToMany(
+    () => TeamMatch,
+    (teamMatch) => teamMatch.homeTeam || teamMatch.awayTeam
+  )
   teamMatches: TeamMatch[];
 }

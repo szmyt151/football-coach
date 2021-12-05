@@ -1,6 +1,7 @@
 import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 import { Team } from "src/teams/entities/team.entity";
 import {
+  Column,
   Entity,
   JoinColumn,
   OneToMany,
@@ -12,6 +13,9 @@ import {
 export class Season {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ nullable: true })
+  name: string;
 
   @JoinColumn()
   @OneToMany((type) => Team, (team) => team.id)
