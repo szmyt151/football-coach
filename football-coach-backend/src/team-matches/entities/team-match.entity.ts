@@ -31,9 +31,6 @@ export class TeamMatch {
   date: Date;
 
   @Column()
-  opponent: string;
-
-  @Column()
   scoreHome: number;
 
   @Column()
@@ -43,12 +40,18 @@ export class TeamMatch {
   @JoinColumn()
   season: Season;
 
-  @OneToOne((type) => Team, (team) => team.id)
-  @JoinColumn()
-  homeTeam: Team;
+  @Column({ nullable: true })
+  homeTeamId: number;
 
   @OneToOne((type) => Team, (team) => team.id)
-  @JoinColumn()
+  @JoinColumn({ name: "homeTeamId" })
+  homeTeam: Team;
+
+  @Column({ nullable: true })
+  awayTeamId: number;
+
+  @OneToOne((type) => Team, (team) => team.id)
+  @JoinColumn({ name: "awayTeamId" })
   awayTeam: Team;
 
   @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id)

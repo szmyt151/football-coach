@@ -7,6 +7,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -36,8 +37,8 @@ export class Team {
   @OneToMany(() => Training, (training) => training.team)
   trainings: Training[];
 
-  @JoinColumn()
-  @ManyToOne(() => Season, (season) => season.id)
+  @JoinTable()
+  @ManyToMany(() => Season, (season) => season.id)
   seasons: Season[];
 
   @JoinColumn()

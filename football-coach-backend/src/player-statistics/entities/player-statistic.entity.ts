@@ -1,3 +1,4 @@
+import { Season } from "src/seasons/entities/season.entity";
 import { Player } from "src/players/entities/player.entity";
 import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 import {
@@ -19,8 +20,12 @@ export class PlayerStatistic {
   teamMatch: TeamMatch[];
 
   @JoinColumn()
+  @ManyToOne((type) => Season, (season) => season.id)
+  season: Season;
+
+  @JoinColumn()
   @ManyToOne((type) => Player, (player) => player.id)
-  player: Player[];
+  player: Player;
 
   @Column()
   goals: number;

@@ -31,4 +31,11 @@ export class PlayerStatisticsService {
   async update(id: number, updatePlayerStatisticDto: UpdatePlayerStatisticDto) {
     await this.playerStatisticRepository.update(id, updatePlayerStatisticDto);
   }
+
+  getStatisticsPerSeasonId(id) {
+    return this.playerStatisticRepository.find({
+      where: { season: id },
+      relations: ["player", "teamMatch"],
+    });
+  }
 }

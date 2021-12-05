@@ -19,7 +19,7 @@ export class CreatePlayerStatisticDto {
   redCards: number;
 
   @ApiProperty()
-  player: Player[];
+  player: Player;
 
   @ApiProperty()
   teamMatch: TeamMatch[];

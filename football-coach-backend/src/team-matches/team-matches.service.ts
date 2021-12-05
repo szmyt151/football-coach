@@ -13,11 +13,18 @@ export class TeamMatchesService {
   ) {}
 
   findAll(): Promise<TeamMatch[]> {
-    return this.teamMatchRepository.find();
+    return this.teamMatchRepository.find({
+      relations: ["season", "homeTeam", "awayTeam"],
+    });
   }
 
   findOne(id: number): Promise<TeamMatch> {
-    return this.teamMatchRepository.findOne(id);
+    return this.teamMatchRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ["season", "homeTeam", "awayTeam", "playerStatistics"],
+    });
   }
 
   async remove(id: number): Promise<void> {

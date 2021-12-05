@@ -9,5 +9,6 @@ import { TeamMatch } from "src/team-matches/entities/team-match.entity";
   imports: [TypeOrmModule.forFeature([PlayerStatistic, TeamMatch])],
   controllers: [PlayerStatisticsController],
   providers: [PlayerStatisticsService],
+  exports: [PlayerStatisticsService],
 })
 export class PlayerStatisticsModule {}

@@ -41,7 +41,8 @@ class CustomTable extends React.Component {
                                 viewColumns: false,
                                 filter: false,
                                 fixedHeader: true,
-                                selectableRows: "single",
+                                selectableRows:
+                                    this.props.selectableRows || "single",
                                 onRowsSelect: this.onRowsSelect,
                                 customToolbarSelect: (selectedRows) => (
                                     <CustomToolbarSelect

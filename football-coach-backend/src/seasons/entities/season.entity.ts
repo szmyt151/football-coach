@@ -1,9 +1,12 @@
+import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
 import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 import { Team } from "src/teams/entities/team.entity";
 import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -17,11 +20,15 @@ export class Season {
   @Column({ nullable: true })
   name: string;
 
-  @JoinColumn()
-  @OneToMany((type) => Team, (team) => team.id)
+  @ManyToMany((type) => Team, (team) => team.id)
+  @JoinTable()
   teams: Team[];
 
+  @OneToMany((type) => TeamMatch, (teamMatch) => teamMatch.season)
   @JoinColumn()
-  @OneToMany((type) => TeamMatch, (teamMatch) => teamMatch.id)
   seasonMatches: TeamMatch[];
+
+  @JoinColumn()
+  @OneToMany((type) => PlayerStatistic, (players) => players.season)
+  playerStatistics: PlayerStatistic;
 }

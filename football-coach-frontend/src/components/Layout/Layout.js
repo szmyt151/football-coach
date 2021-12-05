@@ -27,7 +27,11 @@ import Charts from "../../pages/charts";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 import PlayersStatistics from "../../pages/playersStatistics/PlayersStatistics";
+import PlayersStatisticsSingle from "../../pages/playersStatistics/PlayersStatisticsSingle";
 import MatchesTable from "../../pages/matches/MatchesTable";
+import MatchesSingle from "../../pages/matches/MatchesSingle";
+import SeasonsTable from "../../pages/sesaons/SeasonsTable";
+import SeasonSingle from "../../pages/sesaons/SeasonSingle";
 function Layout(props) {
     var classes = useStyles();
 
@@ -85,23 +89,35 @@ function Layout(props) {
                             path="/app/statistics"
                             component={PlayersStatistics}
                         />
+                        <Route
+                            path="/app/statistics/:playerid"
+                            component={PlayersStatisticsSingle}
+                        />
 
                         <Route
                             exact
                             path="/app/matches"
                             component={MatchesTable}
                         />
-                        {/* <Route
+                        <Route
                             path="/app/matches/:matchid"
-                            component={MatchSingle}
-                        /> */}
-
-                        {/* <Route path="/app/statistics/:playerid" component={PlayersStatisticsSingle} /> */}
+                            component={MatchesSingle}
+                        />
 
                         <Route exact path="/app/teams" component={TeamsTable} />
                         <Route
                             path="/app/teams/:teamid"
                             component={TeamSingle}
+                        />
+
+                        <Route
+                            exact
+                            path="/app/seasons"
+                            component={SeasonsTable}
+                        />
+                        <Route
+                            path="/app/seasons/:seasonid"
+                            component={SeasonSingle}
                         />
 
                         <Route path="/app/ui/maps" component={Maps} />

@@ -69,6 +69,7 @@ const structure = [
     },
     { id: 8, label: "Teams", link: "/app/teams", icon: <StarHalfIcon /> },
     { id: 9, label: "Matches", link: "/app/matches", icon: <StarHalfIcon /> },
+    { id: 10, label: "Seasons", link: "/app/seasons", icon: <StarHalfIcon /> },
 ];
 
 function Sidebar({ location }) {

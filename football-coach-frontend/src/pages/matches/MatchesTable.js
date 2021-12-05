@@ -7,37 +7,53 @@ import { withRouter } from "react-router-dom";
 
 const columns = [
     {
-        name: "id",
-        label: "Number ID",
+        name: "homeTeam",
+        label: "Home",
         options: {
             filter: true,
             sort: true,
-            display: false,
+            customBodyRender: (data, ...args) => {
+                return data.name;
+            },
         },
     },
     {
-        name: "userId",
-        label: "Number ID",
+        name: "awayTeam",
+        label: "Away",
         options: {
             filter: true,
             sort: true,
-            display: false,
+            customBodyRender: (data, ...args) => {
+                return data.name;
+            },
         },
     },
     {
-        name: "name",
-        label: "Name",
+        name: "scoreHome",
+        label: "Home score",
         options: {
             filter: true,
             sort: false,
+            customBodyRender: (data, ...args) => {
+                return <>{data}</>;
+            },
         },
     },
     {
-        label: "MyTeam",
-        name: "myTeam",
+        name: "scoreAway",
+        label: "Away score",
         options: {
             customBodyRender: (data, ...args) => {
-                return <div>{data ? <FavoriteIcon /> : null}</div>;
+                return <>{data}</>;
+            },
+        },
+    },
+    {
+        name: "date",
+        label: "Match day",
+        options: {
+            customBodyRender: (data, ...args) => {
+                return <>{new Date(data).toLocaleDateString()}</>;
             },
         },
     },
