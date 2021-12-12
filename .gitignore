@@ -8,7 +8,6 @@ yarn-error.log*
 lerna-debug.log*
 
 football-coach-next2
-postgres-data
 postgres-data2
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
