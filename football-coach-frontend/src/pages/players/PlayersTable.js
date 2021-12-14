@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../axios";
 import CustomTable from "../../components/Table/CustomTable";
 import { getAge } from "../../components/Players/helpers";
+import { withRouter } from "react-router-dom";
 
 const columns = [
     {
@@ -61,7 +62,7 @@ const columns = [
     },
 ];
 
-export default function PlayersTable() {
+function PlayersTable(props) {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -74,5 +75,33 @@ export default function PlayersTable() {
         fetchPlayers();
     }, []);
 
-    return <CustomTable title="Players" columns={columns} rows={rows} />;
+    const handleEditClick = (e, payload) => {
+        console.log("handleEditClick", { e, payload });
+        props.history.push({
+            pathname: `/app/players/${payload.selectedRowData.id}`,
+        });
+    };
+    const handleShowMoreClick = (e, payload) => {
+        console.log("handleShowMoreClick", { e, payload });
+        props.history.push({
+            pathname: `/app/players/${payload.selectedRowData.id}`,
+        });
+    };
+
+    const handleDeleteClick = (...args) => {
+        console.log("handleEditClick", { args });
+    };
+
+    return (
+        <CustomTable
+            title="Players"
+            columns={columns}
+            rows={rows}
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+            handleShowMoreClick={handleShowMoreClick}
+        />
+    );
 }
+
+export default withRouter(PlayersTable);

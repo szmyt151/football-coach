@@ -39,12 +39,12 @@ export default function BasicSpeedDial() {
                 tooltipTitle="Add Match"
                 onClick={() => openModal("match")}
             />
-            <SpeedDialAction
+            {/* <SpeedDialAction
                 key="AddPlayer"
                 icon={<PeopleIcon />}
                 tooltipTitle="Add Player"
                 onClick={() => openModal("player")}
-            />
+            /> */}
         </SpeedDial>
     );
 }

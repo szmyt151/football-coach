@@ -23,7 +23,7 @@ export class PlayersService {
       where: {
         id,
       },
-      relations: ["team"],
+      relations: ["team", "playerStatistics", "trainings"],
     });
   }
 
