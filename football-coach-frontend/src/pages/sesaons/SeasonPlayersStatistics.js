@@ -21,7 +21,7 @@ const columns = [
         label: "Goals",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
 
@@ -30,25 +30,25 @@ const columns = [
         label: "Assists",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
 
     {
-        name: "Clean Sheet",
-        label: "cleanSheets",
+        name: "cleanSheets",
+        label: "Clean Sheet",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
 
     {
-        name: "Yellow cards",
-        label: "yellowCards",
+        name: "yellowCards",
+        label: "Yellow cards",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
 
@@ -57,37 +57,7 @@ const columns = [
         label: "Red cards",
         options: {
             filter: true,
-            sort: false,
-            display: false,
-        },
-    },
-
-    {
-        name: "gl",
-        label: "GL",
-        options: {
-            filter: true,
-            sort: false,
-            display: false,
-        },
-    },
-
-    {
-        name: "gd",
-        label: "GD",
-        options: {
-            filter: true,
-            sort: false,
-            display: false,
-        },
-    },
-
-    {
-        name: "points",
-        label: "Points",
-        options: {
-            filter: true,
-            sort: false,
+            sort: true,
         },
     },
 ];

@@ -9,6 +9,7 @@
     "node-fetch": "^2.6.1"
   },
   "dependencies": {
+    "@date-io/date-fns": "^2.11.0",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^4.11.3",
@@ -16,10 +17,12 @@
     "@material-ui/styles": "^4.11.3",
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.4.0",
+    "@mui/lab": "^5.0.0-alpha.59",
     "@mui/material": "^5.2.2",
     "apexcharts": "^3.24.0",
     "axios": "^0.24.0",
     "classnames": "^2.2.6",
+    "date-fns": "^2.27.0",
     "font-awesome": "^4.7.0",
     "mui-datatables": "^3.7.4",
     "react": "^16.14.0",
@@ -28,6 +31,7 @@
     "react-google-maps": "^9.4.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-soccer-lineup": "^0.4.3",
     "react-syntax-highlighter": "^15.4.3",
     "react-toastify": "^7.0.3",
     "recharts": "^2.0.4",

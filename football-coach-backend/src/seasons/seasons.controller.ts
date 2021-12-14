@@ -136,7 +136,7 @@ export class SeasonsController {
         );
         const yellowCards = playerStats.reduce(
           (prevValue, currentValue) => currentValue.yellowCards + prevValue,
-          5
+          0
         );
         const redCards = playerStats.reduce(
           (prevValue, currentValue) => currentValue.redCards + prevValue,

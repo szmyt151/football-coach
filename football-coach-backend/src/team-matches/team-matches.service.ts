@@ -32,7 +32,8 @@ export class TeamMatchesService {
   }
 
   async create(createTeamMatchDto: CreateTeamMatchDto) {
-    await this.teamMatchRepository.create(createTeamMatchDto);
+    const teamMatch = await this.teamMatchRepository.create(createTeamMatchDto);
+    return await this.teamMatchRepository.save(teamMatch);
   }
 
   async update(id: number, updateTeamMatchDto: UpdateTeamMatchDto) {

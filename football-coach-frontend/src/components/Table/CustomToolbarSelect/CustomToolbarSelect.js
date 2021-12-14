@@ -30,50 +30,60 @@ class CustomToolbarSelect extends React.Component {
             selectedRows,
             selectedRowData,
             handleShowMoreClick,
+            showEdit = true,
+            showDelete = true,
+            showMore = true,
         } = this.props;
 
         return (
             <div className={"custom-toolbar-select"}>
-                <Tooltip title={"Edit"}>
-                    <IconButton
-                        className={classes.iconButton}
-                        onClick={(e) =>
-                            handleEditClick(e, {
-                                selectedRows,
-                                selectedRowData,
-                            })
-                        }
-                    >
-                        <EditIcon className={classes.deleteIcon} />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title={"Delete"}>
-                    <IconButton
-                        className={classes.iconButton}
-                        onClick={(e) =>
-                            handleDeleteClick(e, {
-                                selectedRows,
-                                selectedRowData,
-                            })
-                        }
-                    >
-                        <DeleteIcon className={classes.deleteIcon} />
-                    </IconButton>
-                </Tooltip>
+                {showEdit && (
+                    <Tooltip title={"Edit"}>
+                        <IconButton
+                            className={classes.iconButton}
+                            onClick={(e) =>
+                                handleEditClick(e, {
+                                    selectedRows,
+                                    selectedRowData,
+                                })
+                            }
+                        >
+                            <EditIcon className={classes.deleteIcon} />
+                        </IconButton>
+                    </Tooltip>
+                )}
 
-                <Tooltip title={"Show more"}>
-                    <IconButton
-                        className={classes.iconButton}
-                        onClick={(e) =>
-                            handleShowMoreClick(e, {
-                                selectedRows,
-                                selectedRowData,
-                            })
-                        }
-                    >
-                        <ArrowForwardIcon className={classes.deleteIcon} />
-                    </IconButton>
-                </Tooltip>
+                {showDelete && (
+                    <Tooltip title={"Delete"}>
+                        <IconButton
+                            className={classes.iconButton}
+                            onClick={(e) =>
+                                handleDeleteClick(e, {
+                                    selectedRows,
+                                    selectedRowData,
+                                })
+                            }
+                        >
+                            <DeleteIcon className={classes.deleteIcon} />
+                        </IconButton>
+                    </Tooltip>
+                )}
+
+                {showMore && (
+                    <Tooltip title={"Show more"}>
+                        <IconButton
+                            className={classes.iconButton}
+                            onClick={(e) =>
+                                handleShowMoreClick(e, {
+                                    selectedRows,
+                                    selectedRowData,
+                                })
+                            }
+                        >
+                            <ArrowForwardIcon className={classes.deleteIcon} />
+                        </IconButton>
+                    </Tooltip>
+                )}
             </div>
         );
     }

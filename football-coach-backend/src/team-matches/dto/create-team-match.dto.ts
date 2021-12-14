@@ -1,21 +1,22 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Season } from "src/seasons/entities/season.entity";
 
 export class CreateTeamMatchDto {
   @ApiProperty()
-  date: Date;
+  date: string;
 
   @ApiProperty()
-  matchResult: string;
+  scoreHome: number;
 
   @ApiProperty()
-  homeAway: string;
+  scoreAway: number;
 
   @ApiProperty()
-  opponent: string;
+  homeTeamId: number;
 
   @ApiProperty()
-  team: number;
+  awayTeamId: number;
 
   @ApiProperty()
-  oponentInDatabase: number;
+  season: Season;
 }

@@ -25,27 +25,45 @@ function CustomForm(props) {
         <>
             <form onSubmit={handleSubmit} action="post">
                 <FormGroup>
-                    <FormControl>
-                        {props.fields.map((field) => {
-                            if (field.type === "input") {
-                                return (
+                    {props.fields.map((field) => {
+                        if (field.type === "input") {
+                            return (
+                                <FormControl style={{ marginBottom: "15px" }}>
                                     <TextField
                                         key={field.name}
                                         label={field.label}
                                         name={field.name}
                                         variant="standard"
                                     />
-                                );
-                            }
+                                </FormControl>
+                            );
+                        }
 
-                            if (field.type === "select") {
-                                return (
+                        if (field.type === "number") {
+                            return (
+                                <FormControl style={{ marginBottom: "15px" }}>
+                                    <TextField
+                                        key={field.name}
+                                        label={field.label}
+                                        name={field.name}
+                                        inputProps={{
+                                            inputMode: "numeric",
+                                            pattern: "[0-9]*",
+                                        }}
+                                    />
+                                </FormControl>
+                            );
+                        }
+
+                        if (field.type === "select") {
+                            return (
+                                <FormControl style={{ marginBottom: "15px" }}>
                                     <CustomSelect key={field.name} {...field} />
-                                );
-                            }
-                            return null;
-                        })}
-                    </FormControl>
+                                </FormControl>
+                            );
+                        }
+                        return null;
+                    })}
                 </FormGroup>
                 <br />
                 <FormGroup>

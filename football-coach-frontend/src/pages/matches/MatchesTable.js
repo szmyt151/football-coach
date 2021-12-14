@@ -61,20 +61,16 @@ const columns = [
 
 function MatchesTable(props) {
     const [teamsMatches, setTeamsMatches] = useState([]);
-
+    const fetchTeamsMatches = async () => {
+        axios.get("/team-matches").then((data) => {
+            setTeamsMatches(data.data);
+        });
+    };
     useEffect(() => {
-        const fetchTeamsMatches = async () => {
-            axios.get("/team-matches").then((data) => {
-                setTeamsMatches(data.data);
-            });
-        };
-
         fetchTeamsMatches();
     }, []);
 
     const handleShowMoreClick = (e, payload) => {
-        console.log("handleShowMoreClick", { e, payload });
-        console.log("handleShowMoreClick", { props });
         props.history.push({
             pathname: `/app/matches/${payload.selectedRowData.id}`,
             state: { team: payload.selectedRowData },
@@ -82,17 +78,22 @@ function MatchesTable(props) {
     };
 
     const handleEditClick = (e, payload) => {
-        console.log("handleEditClick", { e, payload });
-        console.log("handleEditClick", { props });
         props.history.push({
             pathname: `/app/matches/${payload.selectedRowData.id}`,
             state: { team: payload.selectedRowData },
         });
     };
 
-    const handleDeleteClick = (...args) => {
-        console.log("handleDeleteClick", { args });
-        console.log("handleDeleteClick", { props });
+    const handleDeleteClick = (arg, payload) => {
+        console.log("handleDeleteClick", { arg });
+        console.log("handleDeleteClick", { payload });
+
+        axios
+            .delete(`/team-matches/${payload.selectedRowData.id}`)
+            .then(async () => {
+                await fetchTeamsMatches();
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -103,6 +104,7 @@ function MatchesTable(props) {
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
         />
     );
 }

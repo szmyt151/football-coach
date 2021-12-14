@@ -23,7 +23,7 @@ const columns = [
     },
 
     {
-        name: "homeScore",
+        name: "scoreHome",
         label: "Home score",
         options: {
             filter: true,
@@ -32,7 +32,7 @@ const columns = [
     },
 
     {
-        name: "awayScore",
+        name: "scoreAway",
         label: "Away score",
         options: {
             filter: true,
@@ -46,6 +46,9 @@ const columns = [
         options: {
             filter: true,
             sort: false,
+            customBodyRender: (data, ...args) => {
+                return new Date(data).toLocaleDateString();
+            },
         },
     },
 ];
@@ -73,17 +76,26 @@ export default function SeasonMatches(props) {
         console.log("handleDeleteClick", { props });
     };
 
-    if (props.season.tableData)
+    console.log({
+        tableData: props.season.tableData,
+        matches: props?.season.seasonMatches,
+    });
+    if (props.season.seasonMatches) {
+        const rows = props.season.seasonMatches.map((r) => {
+            const teamA = props.season.teams.find((t) => t.id == r.homeTeamId);
+            const teamB = props.season.teams.find((t) => t.id == r.awayTeamId);
+            return { ...r, homeTeamId: teamA.name, awayTeamId: teamB.name };
+        });
         return (
             <CustomTable
                 title="Matches"
                 columns={columns}
-                rows={props?.season.seasonMatches}
+                rows={rows}
                 handleEditClick={handleEditClick}
                 handleDeleteClick={handleDeleteClick}
                 handleShowMoreClick={handleShowMoreClick}
                 selectableRows="none"
             />
         );
-    else return null;
+    } else return null;
 }

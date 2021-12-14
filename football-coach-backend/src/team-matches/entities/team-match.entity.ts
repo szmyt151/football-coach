@@ -11,24 +11,13 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-export enum TeamMatchResultEnum {
-  WIN = "Win",
-  LOSE = "Lose",
-  TIE = "Tie",
-}
-
-export enum HomeAwayEnum {
-  HOME = "Home",
-  AWAY = "Away",
-}
-
 @Entity()
 export class TeamMatch {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  date: Date;
+  @Column({ nullable: true })
+  date: string;
 
   @Column()
   scoreHome: number;
@@ -36,25 +25,27 @@ export class TeamMatch {
   @Column()
   scoreAway: number;
 
-  @ManyToOne((type) => Season, (season) => season.id)
-  @JoinColumn()
-  season: Season;
-
   @Column({ nullable: true })
   homeTeamId: number;
-
-  @OneToOne((type) => Team, (team) => team.id)
-  @JoinColumn({ name: "homeTeamId" })
-  homeTeam: Team;
 
   @Column({ nullable: true })
   awayTeamId: number;
 
-  @OneToOne((type) => Team, (team) => team.id)
+  @ManyToOne((type) => Season, (season) => season.id)
+  @JoinColumn()
+  season: Season;
+
+  @ManyToOne((type) => Team, (team) => team.id)
+  @JoinColumn({ name: "homeTeamId" })
+  homeTeam: Team;
+
+  @ManyToOne((type) => Team, (team) => team.id)
   @JoinColumn({ name: "awayTeamId" })
   awayTeam: Team;
 
-  @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id)
+  @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   playerStatistics: PlayerStatistic[];
 }

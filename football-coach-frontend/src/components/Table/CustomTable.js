@@ -46,6 +46,7 @@ class CustomTable extends React.Component {
                                 onRowsSelect: this.onRowsSelect,
                                 customToolbarSelect: (selectedRows) => (
                                     <CustomToolbarSelect
+                                        {...this.props}
                                         selectedRows={selectedRows}
                                         selectedRowData={this.state.selectedRow}
                                         handleEditClick={
