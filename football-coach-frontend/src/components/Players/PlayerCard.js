@@ -33,14 +33,14 @@ export default function PlayerCard({ player }) {
                 </Typography>
             </CardContent>
             <CardActions style={{ justifyContent: "flex-end" }}>
-                <Link
+                {/* <Link
                     to={{ pathname: `/app/statistics/${player.id}` }}
                     style={{ textDecoration: "none" }}
                 >
                     <Button size="small" onClick={showStatistics}>
                         Show statistics
                     </Button>
-                </Link>
+                </Link> */}
 
                 <Link
                     to={{ pathname: `/app/players/${player.id}` }}

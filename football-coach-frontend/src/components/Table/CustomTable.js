@@ -12,12 +12,8 @@ class CustomTable extends React.Component {
         this.state = { selectedRow: {} };
     }
     onRowsSelect = (curRowSelected, allRowsSelected) => {
-        console.log("---RowSelect");
-        console.log("Row Selected: ", curRowSelected);
-        console.log("All Selected: ", allRowsSelected);
-
         if (allRowsSelected[0]) {
-            const rowData = this.props.rows[allRowsSelected[0].index]; //.dataIndex
+            const rowData = this.props.rows[allRowsSelected[0].index];
             this.setState({ selectedRow: rowData });
         } else {
             this.setState({ selectedRow: {} });
@@ -41,6 +37,7 @@ class CustomTable extends React.Component {
                                 viewColumns: false,
                                 filter: false,
                                 fixedHeader: true,
+                                search: this.props.search && true && true,
                                 selectableRows:
                                     this.props.selectableRows || "single",
                                 onRowsSelect: this.onRowsSelect,

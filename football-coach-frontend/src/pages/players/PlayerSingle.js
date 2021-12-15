@@ -8,17 +8,71 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { getAge } from "../../components/Players/helpers";
 import { Link } from "react-router-dom";
+import CustomTable from "../../components/Table/CustomTable";
+
+const columns = [
+    {
+        name: "goals",
+        label: "Goals",
+        options: {
+            filter: false,
+            sort: false,
+        },
+    },
+
+    {
+        name: "assists",
+        label: "Assists",
+        options: {
+            filter: false,
+            sort: false,
+        },
+    },
+
+    {
+        name: "cleanSheets",
+        label: "Clean Sheet",
+        options: {
+            filter: false,
+            sort: false,
+        },
+    },
+
+    {
+        name: "yellowCards",
+        label: "Yellow cards",
+        options: {
+            filter: false,
+            sort: false,
+        },
+    },
+
+    {
+        name: "redCards",
+        label: "Red cards",
+        options: {
+            filter: false,
+            sort: false,
+        },
+    },
+];
+
 export default function PlayerSingle(props) {
     const [player, setPlayer] = useState({});
 
+    const handleEditClick = (e, payload) => {};
+    const handleShowMoreClick = (e, payload) => {};
+    const handleDeleteClick = (...args) => {};
+
     useEffect(() => {
         const fetchPlayer = async () => {
-            console.log({ props });
             axios
                 .get(`/players/${props.match.params.playerid}`)
                 .then((data) => {
-                    console.log({ playerdata: data.data });
                     setPlayer(data.data);
+                })
+                .catch((error) => {
+                    console.log(error);
                 });
         };
 
@@ -67,41 +121,18 @@ export default function PlayerSingle(props) {
                     </Card>
                 </Grid>
             </Grid>
-
-            <PageTitle title="Last matches" />
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <Card key={player.id} sx={{ minWidth: 275 }}>
-                        <CardContent>
-                            <Typography
-                                sx={{ fontSize: 14 }}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                Show player matches here
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
-
-            <PageTitle title="Statistics" />
-
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <Card key={player.id} sx={{ minWidth: 275 }}>
-                        <CardContent>
-                            <Typography
-                                sx={{ fontSize: 14 }}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                Show player statistics here
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
+            {player ? (
+                <CustomTable
+                    title="Statistics"
+                    columns={columns}
+                    rows={[player.stats]}
+                    handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
+                    handleShowMoreClick={handleShowMoreClick}
+                    selectableRows="none"
+                    search={false}
+                />
+            ) : null}
         </>
     );
 }

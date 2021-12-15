@@ -11,6 +11,7 @@ import { PlayersService } from "./players.service";
 import { CreatePlayerDto } from "./dto/create-player.dto";
 import { UpdatePlayerDto } from "./dto/update-player.dto";
 import { PlayerPositionEnum } from "./entities/player.entity";
+import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
 
 @Controller("players")
 export class PlayersController {
@@ -34,8 +35,24 @@ export class PlayersController {
   @Get(":id")
   async findOne(@Param("id") id: number) {
     const data = await this.playersService.findOne(id);
-    console.log({ data });
-    return data;
+
+    let stats = {
+      goals: 0,
+      assists: 0,
+      yellowCards: 0,
+      redCards: 0,
+      cleanSheets: 0,
+    };
+
+    data.playerStatistics.forEach((stat) => {
+      stats.goals += stat.goals;
+      stats.assists += stat.assists;
+      stats.yellowCards += stat.yellowCards;
+      stats.redCards += stat.redCards;
+      stats.cleanSheets += stat.cleanSheets;
+    });
+
+    return { ...data, stats };
   }
 
   @Get("/team/:teamid")

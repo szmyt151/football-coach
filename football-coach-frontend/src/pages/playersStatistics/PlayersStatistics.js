@@ -9,6 +9,7 @@ import PlayerCard from "../../components/Players/PlayerCard";
 export default function PlayersStatistics() {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
+    const [selectedPlayer, setSelectedPlayer] = useState();
 
     const loading = open && options.length === 0;
 
@@ -41,6 +42,15 @@ export default function PlayersStatistics() {
         fetchPlayers();
     }, []);
 
+    let players = options;
+
+    if (selectedPlayer) {
+        console.log(selectedPlayer);
+        players = players.filter(
+            (p) => `${p.firstName} ${p.lastName}` === selectedPlayer,
+        );
+    }
+
     return (
         <>
             {options && (
@@ -54,12 +64,16 @@ export default function PlayersStatistics() {
                     onClose={() => {
                         setOpen(false);
                     }}
-                    isOptionEqualToValue={(option, value) =>
-                        option.firstName === value.firstName
+                    getOptionLabel={(option) =>
+                        `${option.firstName} ${option.lastName}`
                     }
-                    getOptionLabel={(option) => option.firstName}
                     options={options}
                     loading={loading}
+                    value={selectedPlayer}
+                    onInputChange={(event, value, reason) => {
+                        console.log({ event, value, reason });
+                        setSelectedPlayer(value);
+                    }}
                     renderInput={(params) => (
                         <TextField
                             {...params}
@@ -85,8 +99,8 @@ export default function PlayersStatistics() {
 
             <PageTitle title="Players" />
             <Grid container spacing={2}>
-                {options &&
-                    options.map((player) => {
+                {players &&
+                    players.map((player) => {
                         return (
                             <Grid item md key={player.id}>
                                 <PlayerCard player={player} />

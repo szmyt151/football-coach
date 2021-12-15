@@ -24,7 +24,7 @@ export default function PlayersStatisticsSingle(props) {
         const fetchPlayerStatistics = async () => {
             console.log({ props });
             axios
-                .get(`/okayer-statistics/${props.match.params.playerid}`)
+                .get(`/player-statistics/${props.match.params.playerid}`)
                 .then((data) => {
                     setPlayerStatistics(data.data);
                 });
