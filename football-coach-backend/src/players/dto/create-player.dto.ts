@@ -19,6 +19,12 @@ export class CreatePlayerDto {
   @ApiProperty()
   teamId: number;
 
-  // @ApiProperty()
-  // playerStatistics: number[];
+  @ApiProperty()
+  nationality: string;
+
+  @ApiProperty()
+  firstsquad: boolean;
+
+  @ApiProperty()
+  shirtNumber: number;
 }

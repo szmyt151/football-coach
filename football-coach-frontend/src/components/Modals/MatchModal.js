@@ -310,7 +310,7 @@ export default function MatchModal() {
                             >
                                 <Button
                                     variant="contained"
-                                    loading={loading}
+                                    loading={loading.toString()}
                                     type="submit"
                                 >
                                     Save

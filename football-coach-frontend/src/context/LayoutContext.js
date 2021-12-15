@@ -1,5 +1,6 @@
 import React from "react";
 import MatchModal from "../components/Modals/MatchModal";
+import PlayerModal from "../components/Modals/PlayerModal";
 
 var LayoutStateContext = React.createContext();
 var LayoutDispatchContext = React.createContext();
@@ -31,6 +32,7 @@ function LayoutProvider({ children }) {
             <LayoutDispatchContext.Provider value={dispatch}>
                 {children}
                 {state.showMatchModal && <MatchModal />}
+                {state.showPlayerModal && <PlayerModal />}
             </LayoutDispatchContext.Provider>
         </LayoutStateContext.Provider>
     );

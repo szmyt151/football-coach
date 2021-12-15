@@ -60,7 +60,7 @@ export class Player {
   @Column("enum", { enum: PlayerPositionEnum })
   playerPosition: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: false })
   firstsquad: boolean;
 
   @Column({ default: Math.floor(Math.random() * (99 - 1 + 1) + 1) })
