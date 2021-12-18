@@ -39,7 +39,7 @@ export enum PlayerFootEnum {
 
 @Entity()
 export class Player {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("rowid")
   id: number;
 
   @Column()
@@ -66,11 +66,11 @@ export class Player {
   @Column({ default: Math.floor(Math.random() * (99 - 1 + 1) + 1) })
   shirtNumber: number;
 
-  @Column()
+  @Column({ unique: false })
   teamId: number;
 
   @ManyToOne(() => Team, (team) => team.id)
-  @JoinColumn()
+  @JoinColumn({ referencedColumnName: "id" })
   team: Team;
 
   @OneToMany(

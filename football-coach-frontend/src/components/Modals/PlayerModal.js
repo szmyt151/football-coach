@@ -42,6 +42,7 @@ const style = {
 export default function PlayerModal() {
     const [loading, setLoading] = React.useState(false);
     const [date, setDate] = React.useState(new Date());
+    const [playerPositions, setPlayerPositions] = React.useState([]);
 
     const handleDateChange = (date, handInput) => {
         setDate(date);
@@ -58,7 +59,7 @@ export default function PlayerModal() {
         setLoading(true);
 
         axios
-            .post("/player", Object.fromEntries(formdata))
+            .post("/players", Object.fromEntries(formdata))
             .then(() => {
                 setLoading(false);
                 handleClose();
@@ -79,6 +80,16 @@ export default function PlayerModal() {
         };
 
         fetchTeams();
+    }, []);
+
+    useEffect(() => {
+        const fetchPlayerPositions = async () => {
+            axios.get("players/positions").then((data) => {
+                setPlayerPositions(Object.entries(data.data));
+            });
+        };
+
+        fetchPlayerPositions();
     }, []);
 
     return (
@@ -181,15 +192,17 @@ export default function PlayerModal() {
                                             labelId="plaerPosition"
                                             required
                                         >
-                                            {teams &&
-                                                teams.map((option, index) => (
-                                                    <MenuItem
-                                                        key={index}
-                                                        value={option.id}
-                                                    >
-                                                        {option.name}
-                                                    </MenuItem>
-                                                ))}
+                                            {playerPositions &&
+                                                playerPositions.map(
+                                                    (option, index) => (
+                                                        <MenuItem
+                                                            key={index}
+                                                            value={option[1]}
+                                                        >
+                                                            {option[1]}
+                                                        </MenuItem>
+                                                    ),
+                                                )}
                                         </Select>
                                     </FormControl>
 
@@ -276,7 +289,7 @@ export default function PlayerModal() {
                                         }}
                                     >
                                         <FormControlLabel
-                                            control={<Checkbox />}
+                                            control={<Checkbox value={true} />}
                                             label="First squad"
                                             name="firstsquad"
                                         />

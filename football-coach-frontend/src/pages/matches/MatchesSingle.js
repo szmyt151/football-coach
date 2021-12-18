@@ -15,6 +15,8 @@ import { getAge } from "../../components/Players/helpers";
 import Pitch from "../../components/Pitch/Pitch";
 import { Link } from "react-router-dom";
 
+import { SportsSoccer as SportsSoccerIcon } from "@material-ui/icons";
+
 export default function MatchesSingle(props) {
     const [match, setMatch] = useState(props.location.state || null);
 
@@ -30,13 +32,118 @@ export default function MatchesSingle(props) {
         fetchMatch();
     }, []);
 
+    const statType = (stat) => {
+        switch (stat.type) {
+            case "Goal":
+                return <SportsSoccerIcon style={{ marginRight: "5px" }} />;
+            case "Yellow Card":
+                return (
+                    <img src="https://ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg" />
+                );
+            case "Red Card":
+                return (
+                    <img src="https://ssl.gstatic.com/onebox/sports/soccer_timeline/red-card-right.svg" />
+                );
+        }
+    };
+
+    if (!match) return null;
     return (
         <>
-            <PageTitle title={``} />
+            <PageTitle
+                title={`Match ${match.homeTeam.name} vs ${match.awayTeam.name}`}
+            />
 
             <Grid container spacing={4}>
                 <Grid item xs={12}>
-                    <div>{JSON.stringify(match, null, 4)}</div>
+                    <Card>
+                        <CardContent>
+                            <div>
+                                <div>
+                                    {new Date(match.date).toLocaleDateString()}
+                                </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        marginBottom: "30px",
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            flex: 1,
+                                            marginRight: "auto",
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <Typography variant="h4">
+                                            {match.homeTeam.name}
+                                        </Typography>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            flex: 1,
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <Typography variant="h4">
+                                            {" "}
+                                            {match.scoreHome} -{" "}
+                                            {match.scoreAway}
+                                        </Typography>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            flex: 1,
+                                            marginLeft: "auto",
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <Typography variant="h4">
+                                            {match.awayTeam.name}
+                                        </Typography>
+                                    </div>
+                                </div>
+
+                                {match.playerStatistics
+                                    .filter(
+                                        (e) =>
+                                            e.goals ||
+                                            e.yellowCards ||
+                                            e.redCards,
+                                    )
+                                    .map((ps) => {
+                                        return (
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    justifyContent:
+                                                        "space-evenly",
+                                                }}
+                                            >
+                                                <div></div>
+                                                <div
+                                                    style={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    {statType(ps)} {ps.minute}'{" "}
+                                                    {ps.player.firstName}{" "}
+                                                    {ps.player.lastName}
+                                                </div>
+                                                <div></div>
+                                            </div>
+                                        );
+                                    })}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </>

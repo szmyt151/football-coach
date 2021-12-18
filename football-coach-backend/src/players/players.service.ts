@@ -36,7 +36,9 @@ export class PlayersService {
   }
 
   async create(createPlayerDto: CreatePlayerDto) {
-    this.playerRepository.create(createPlayerDto);
+    const player = this.playerRepository.create(createPlayerDto);
+    console.log({ player });
+    return await this.playerRepository.save(player);
   }
 
   async update(id: number, updatePlayerDto: UpdatePlayerDto) {

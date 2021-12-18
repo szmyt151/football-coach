@@ -10,7 +10,7 @@ import {
 import { PlayersService } from "./players.service";
 import { CreatePlayerDto } from "./dto/create-player.dto";
 import { UpdatePlayerDto } from "./dto/update-player.dto";
-import { PlayerPositionEnum } from "./entities/player.entity";
+import { PlayerFootEnum, PlayerPositionEnum } from "./entities/player.entity";
 import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
 
 @Controller("players")
@@ -22,9 +22,14 @@ export class PlayersController {
     return this.playersService.create(createPlayerDto);
   }
 
-  @Get("players/positions")
+  @Get("/positions")
   playersPosition() {
     return PlayerPositionEnum;
+  }
+
+  @Get("/foot")
+  playersFoot() {
+    return PlayerFootEnum;
   }
 
   @Get()

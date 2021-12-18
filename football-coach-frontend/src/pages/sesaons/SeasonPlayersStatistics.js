@@ -84,8 +84,8 @@ export default function SeasonPlayersStatistics(props) {
         console.log("handleDeleteClick", { args });
         console.log("handleDeleteClick", { props });
     };
-
-    if (props.season.stats)
+    console.log("props.season", props.season);
+    if (props.season)
         return (
             <CustomTable
                 title="Statistics"

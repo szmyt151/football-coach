@@ -20,7 +20,7 @@ export class Season {
   @Column({ nullable: true })
   name: string;
 
-  @ManyToMany((type) => Team, (team) => team.id)
+  @ManyToMany((type) => Team, (team) => team.id, { eager: true, cascade: true })
   @JoinTable()
   teams: Team[];
 

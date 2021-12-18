@@ -35,5 +35,6 @@ export class Training {
   team: Team;
 
   @OneToMany((type) => Player, (player) => player.id)
+  @JoinColumn()
   player: Player[];
 }

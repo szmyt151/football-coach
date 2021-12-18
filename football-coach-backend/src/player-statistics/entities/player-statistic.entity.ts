@@ -10,6 +10,14 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+enum PlayerStatisticType {
+  GOAL = "Goal",
+  ASSIST = "Assist",
+  YELLOW_CARD = "Yellow Card",
+  RED_CARD = "Red Card",
+  CLEAN_SHEET = "Clean Sheet",
+}
+
 @Entity()
 export class PlayerStatistic {
   @PrimaryGeneratedColumn()
@@ -41,4 +49,10 @@ export class PlayerStatistic {
 
   @Column()
   redCards: number;
+
+  @Column({ nullable: true })
+  minute: number;
+
+  @Column("enum", { enum: PlayerStatisticType, nullable: true })
+  type: string;
 }

@@ -6,11 +6,13 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import {
     StarHalf as StarHalfIcon,
     People as PeopleIcon,
+    EmojiEvents as EmojiEventsIcon,
 } from "@material-ui/icons";
 import {
     useLayoutDispatch,
     toggleMatchModal,
     togglePlayerModal,
+    toggleSeasonModal,
 } from "../../context/LayoutContext";
 
 export default function BasicSpeedDial() {
@@ -24,6 +26,10 @@ export default function BasicSpeedDial() {
 
         if (modalName === "player") {
             togglePlayerModal(layoutDispatch);
+        }
+
+        if (modalName === "season") {
+            toggleSeasonModal(layoutDispatch);
         }
     };
 
@@ -44,6 +50,13 @@ export default function BasicSpeedDial() {
                 icon={<PeopleIcon />}
                 tooltipTitle="Add Player"
                 onClick={() => openModal("player")}
+            />
+
+            <SpeedDialAction
+                key="AddSeason"
+                icon={<EmojiEventsIcon />}
+                tooltipTitle="Add Season"
+                onClick={() => openModal("season")}
             />
         </SpeedDial>
     );

@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Team } from "src/teams/entities/team.entity";
 import { Repository } from "typeorm";
 import { CreateSeasonDto } from "./dto/create-season.dto";
 import { UpdateSeasonDto } from "./dto/update-season.dto";
@@ -30,10 +31,28 @@ export class SeasonsService {
   }
 
   async create(createSeasonDto: CreateSeasonDto) {
-    this.seasonMatchRepository.create(createSeasonDto);
+    const seasonDto = {
+      ...createSeasonDto,
+      teams: createSeasonDto.teams.split(",").map((e) => {
+        return <Team>{ id: parseInt(e) };
+      }),
+    };
+    const season = this.seasonMatchRepository.create(seasonDto);
+    console.log(season);
+    return this.seasonMatchRepository.save(season);
   }
 
   async update(id: number, updateSeasonDto: UpdateSeasonDto) {
-    await this.seasonMatchRepository.update(id, updateSeasonDto);
+    const seasonDto = {
+      ...updateSeasonDto,
+      teams: updateSeasonDto.teams.split(",").map((e) => {
+        return <Team>{ id: parseInt(e) };
+      }),
+    };
+    const season = this.seasonMatchRepository.create(seasonDto);
+    console.log(season);
+    return this.seasonMatchRepository.save(season);
+
+    // await this.seasonMatchRepository.update(id, updateSeasonDto);
   }
 }

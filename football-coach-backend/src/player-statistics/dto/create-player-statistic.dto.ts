@@ -4,6 +4,9 @@ import { TeamMatch } from "src/team-matches/entities/team-match.entity";
 
 export class CreatePlayerStatisticDto {
   @ApiProperty()
+  minute: number;
+
+  @ApiProperty()
   goals: number;
 
   @ApiProperty()

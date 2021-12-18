@@ -13,6 +13,7 @@ import {
     People as PeopleIcon,
     Payment as PaymentIcon,
     // SportsSoccer as SportsSoccerIcon,
+    EmojiEvents as EmojiEventsIcon,
     StarHalf as StarHalfIcon,
 } from "@material-ui/icons";
 import classNames from "classnames";
@@ -56,7 +57,24 @@ const structure = [
     },
     { id: 8, label: "Teams", link: "/app/teams", icon: <StarHalfIcon /> },
     { id: 9, label: "Matches", link: "/app/matches", icon: <StarHalfIcon /> },
-    { id: 10, label: "Seasons", link: "/app/seasons", icon: <StarHalfIcon /> },
+    {
+        id: 10,
+        label: "Seasons",
+        link: "/app/seasons",
+        icon: <EmojiEventsIcon />,
+    },
+    {
+        id: 11,
+        label: "Trainings",
+        link: "/app/trainings",
+        icon: <StarHalfIcon />,
+    },
+    {
+        id: 12,
+        label: "Staff",
+        link: "/app/staff",
+        icon: <StarHalfIcon />,
+    },
 ];
 
 const SidebarView = ({

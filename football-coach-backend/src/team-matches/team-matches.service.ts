@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
 import { Repository } from "typeorm";
 import { CreateTeamMatchDto } from "./dto/create-team-match.dto";
 import { UpdateTeamMatchDto } from "./dto/update-team-match.dto";
@@ -18,12 +19,12 @@ export class TeamMatchesService {
     });
   }
 
-  findOne(id: number): Promise<TeamMatch> {
+  async findOne(id: number) {
     return this.teamMatchRepository.findOne({
       where: {
         id,
       },
-      relations: ["season", "homeTeam", "awayTeam", "playerStatistics"],
+      relations: ["homeTeam", "awayTeam"],
     });
   }
 

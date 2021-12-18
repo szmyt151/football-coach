@@ -10,10 +10,14 @@ import {
 import { TeamMatchesService } from "./team-matches.service";
 import { CreateTeamMatchDto } from "./dto/create-team-match.dto";
 import { UpdateTeamMatchDto } from "./dto/update-team-match.dto";
+import { PlayerStatisticsService } from "src/player-statistics/player-statistics.service";
 
 @Controller("team-matches")
 export class TeamMatchesController {
-  constructor(private readonly teamMatchesService: TeamMatchesService) {}
+  constructor(
+    private readonly teamMatchesService: TeamMatchesService,
+    private readonly playerStatisticsService: PlayerStatisticsService
+  ) {}
 
   @Post()
   create(@Body() createTeamMatchDto: CreateTeamMatchDto) {
@@ -26,8 +30,14 @@ export class TeamMatchesController {
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.teamMatchesService.findOne(+id);
+  async findOne(@Param("id") id: string) {
+    const teamMatch = await this.teamMatchesService.findOne(+id);
+
+    const playerStatistics = (
+      await this.playerStatisticsService.getStatisticsPerMatch(teamMatch.id)
+    ).sort((a, b) => a.minute - b.minute);
+
+    return { ...teamMatch, playerStatistics };
   }
 
   @Patch(":id")

@@ -22,7 +22,6 @@ import TeamsTable from "../../pages/teams/TeamsTable";
 import TeamSingle from "../../pages/teams/TeamSingle";
 import PlayerSingle from "../../pages/players/PlayerSingle";
 import Icons from "../../pages/icons";
-import Charts from "../../pages/charts";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -32,6 +31,8 @@ import MatchesTable from "../../pages/matches/MatchesTable";
 import MatchesSingle from "../../pages/matches/MatchesSingle";
 import SeasonsTable from "../../pages/sesaons/SeasonsTable";
 import SeasonSingle from "../../pages/sesaons/SeasonSingle";
+import StaffTable from "../../pages/staff/StaffTable";
+import TrainingsTable from "../../pages/trainings/TrainingsTable";
 function Layout(props) {
     var classes = useStyles();
 
@@ -120,9 +121,24 @@ function Layout(props) {
                             component={SeasonSingle}
                         />
 
+                        <Route
+                            exact
+                            path="/app/trainings"
+                            component={TrainingsTable}
+                        />
+                        {/* <Route
+                            path="/app/trainings/:trainingid"
+                            component={SeasonSingle}
+                        /> */}
+
+                        <Route exact path="/app/staff" component={StaffTable} />
+                        {/* <Route
+                            path="/app/staff/:staffid"
+                            component={SeasonSingle}
+                        /> */}
+
                         <Route path="/app/ui/maps" component={Maps} />
                         <Route path="/app/ui/icons" component={Icons} />
-                        <Route path="/app/ui/charts" component={Charts} />
                     </Switch>
                     <BasicSpeedDial />
                 </div>

@@ -5,6 +5,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -43,9 +44,13 @@ export class TeamMatch {
   @JoinColumn({ name: "awayTeamId" })
   awayTeam: Team;
 
-  @OneToMany((type) => PlayerStatistic, (playerStats) => playerStats.id, {
-    onDelete: "CASCADE",
-  })
-  @JoinColumn()
+  @OneToMany(
+    (type) => PlayerStatistic,
+    (playerStats) => playerStats.teamMatch,
+    {
+      onDelete: "CASCADE",
+    }
+  )
+  @JoinTable()
   playerStatistics: PlayerStatistic[];
 }

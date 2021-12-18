@@ -38,4 +38,11 @@ export class PlayerStatisticsService {
       relations: ["player", "teamMatch"],
     });
   }
+
+  getStatisticsPerMatch(id) {
+    return this.playerStatisticRepository.find({
+      where: { teamMatch: id },
+      relations: ["player"],
+    });
+  }
 }

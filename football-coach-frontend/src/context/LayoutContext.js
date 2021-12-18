@@ -1,6 +1,7 @@
 import React from "react";
 import MatchModal from "../components/Modals/MatchModal";
 import PlayerModal from "../components/Modals/PlayerModal";
+import SeasonModal from "../components/Modals/SeasonModal";
 
 var LayoutStateContext = React.createContext();
 var LayoutDispatchContext = React.createContext();
@@ -15,6 +16,9 @@ function layoutReducer(state, action) {
 
         case "PLAYER_MODAL":
             return { ...state, showPlayerModal: !state.showPlayerModal };
+
+        case "SEASON_MODAL":
+            return { ...state, showSeasonModal: !state.showSeasonModal };
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }
@@ -33,6 +37,7 @@ function LayoutProvider({ children }) {
                 {children}
                 {state.showMatchModal && <MatchModal />}
                 {state.showPlayerModal && <PlayerModal />}
+                {state.showSeasonModal && <SeasonModal />}
             </LayoutDispatchContext.Provider>
         </LayoutStateContext.Provider>
     );
@@ -63,6 +68,7 @@ export {
     toggleSidebar,
     toggleMatchModal,
     togglePlayerModal,
+    toggleSeasonModal,
 };
 
 // ###########################################################
@@ -81,5 +87,11 @@ function toggleMatchModal(dispatch) {
 function togglePlayerModal(dispatch) {
     dispatch({
         type: "PLAYER_MODAL",
+    });
+}
+
+function toggleSeasonModal(dispatch) {
+    dispatch({
+        type: "SEASON_MODAL",
     });
 }

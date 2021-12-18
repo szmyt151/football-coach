@@ -260,48 +260,6 @@ export default function MatchModal() {
                                     </FormControl>
                                 </div>
                             </div>
-
-                            <div>
-                                <Typography
-                                    variant="h6"
-                                    component="h6"
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        marginBottom: "30px",
-                                    }}
-                                >
-                                    Player statistics
-                                </Typography>
-
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        marginBottom: "30px",
-                                        justifyContent: "space-evenly",
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                        }}
-                                    >
-                                        <div>
-                                            <IconButton
-                                                onClick={(e) => {
-                                                    console.log(
-                                                        "add player statistic",
-                                                    );
-                                                }}
-                                            >
-                                                <AddIcon />
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <FormControl
                                 style={{
                                     display: "flex",
