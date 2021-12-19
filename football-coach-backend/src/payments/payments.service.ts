@@ -13,11 +13,14 @@ export class PaymentsService {
   ) {}
 
   findAll(): Promise<Payment[]> {
-    return this.playerStatisticRepository.find();
+    return this.playerStatisticRepository.find({ relations: ["user"] });
   }
 
   findOne(id: number): Promise<Payment> {
-    return this.playerStatisticRepository.findOne(id);
+    return this.playerStatisticRepository.findOne({
+      where: { id },
+      relations: ["user"],
+    });
   }
 
   async remove(id: number): Promise<void> {

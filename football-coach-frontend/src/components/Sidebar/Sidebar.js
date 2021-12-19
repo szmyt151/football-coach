@@ -15,6 +15,8 @@ import {
     // SportsSoccer as SportsSoccerIcon,
     EmojiEvents as EmojiEventsIcon,
     StarHalf as StarHalfIcon,
+    FitnessCenter as FitnessCenterIcon,
+    Accessibility as AccessibilityIcon,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
@@ -34,30 +36,30 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-    { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-    {
-        id: 1,
-        label: "Typography",
-        link: "/app/typography",
-        icon: <TypographyIcon />,
-    },
-    {
-        id: 2,
-        label: "Notifications",
-        link: "/app/notifications",
-        icon: <NotificationsIcon />,
-    },
-    {
-        id: 3,
-        label: "UI Elements",
-        link: "/app/ui",
-        icon: <UIElementsIcon />,
-        children: [
-            { label: "Icons", link: "/app/ui/icons" },
-            { label: "Charts", link: "/app/ui/charts" },
-            { label: "Maps", link: "/app/ui/maps" },
-        ],
-    },
+    // { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+    // {
+    //     id: 1,
+    //     label: "Typography",
+    //     link: "/app/typography",
+    //     icon: <TypographyIcon />,
+    // },
+    // {
+    //     id: 2,
+    //     label: "Notifications",
+    //     link: "/app/notifications",
+    //     icon: <NotificationsIcon />,
+    // },
+    // {
+    //     id: 3,
+    //     label: "UI Elements",
+    //     link: "/app/ui",
+    //     icon: <UIElementsIcon />,
+    //     children: [
+    //         { label: "Icons", link: "/app/ui/icons" },
+    //         { label: "Charts", link: "/app/ui/charts" },
+    //         { label: "Maps", link: "/app/ui/maps" },
+    //     ],
+    // },
 
     { id: 4, label: "Admins", link: "/app/users", icon: <PeopleIcon /> },
     { id: 5, label: "Payments", link: "/app/payment", icon: <PaymentIcon /> },
@@ -80,13 +82,13 @@ const structure = [
         id: 11,
         label: "Trainings",
         link: "/app/trainings",
-        icon: <StarHalfIcon />,
+        icon: <FitnessCenterIcon />,
     },
     {
         id: 12,
         label: "Staff",
         link: "/app/staff",
-        icon: <StarHalfIcon />,
+        icon: <AccessibilityIcon />,
     },
 ];
 

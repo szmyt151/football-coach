@@ -43,37 +43,32 @@ const columns = [
 
 export default function SeasonsTable(props) {
     const [rows, setRows] = useState([]);
-
+    const fetchSeasons = async () => {
+        axios.get("/seasons").then((data) => {
+            setRows(data.data);
+        });
+    };
     useEffect(() => {
-        const fetchSeasons = async () => {
-            axios.get("/seasons").then((data) => {
-                setRows(data.data);
-            });
-        };
-
         fetchSeasons();
     }, []);
 
     const handleEditClick = (e, payload) => {
-        console.log("handleEditClick", { e, payload });
-        console.log("handleEditClick", { props });
         props.history.push({
             pathname: `/app/seasons/${payload.selectedRowData.id}`,
             state: { team: payload.selectedRowData },
         });
     };
     const handleShowMoreClick = (e, payload) => {
-        console.log("handleShowMoreClick", { e, payload });
-        console.log("handleShowMoreClick", { props });
         props.history.push({
             pathname: `/app/seasons/${payload.selectedRowData.id}`,
             state: { team: payload.selectedRowData },
         });
     };
 
-    const handleDeleteClick = (...args) => {
-        console.log("handleEditClick", { args });
-        console.log("handleDeleteClick", { props });
+    const handleDeleteClick = (e, payload) => {
+        axios.delete(`/seasons/${payload.selectedRowData.id}`).then((data) => {
+            fetchSeasons();
+        });
     };
 
     return (
@@ -84,6 +79,7 @@ export default function SeasonsTable(props) {
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
         />
     );
 }

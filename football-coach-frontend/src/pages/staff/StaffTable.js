@@ -7,25 +7,7 @@ import { withRouter } from "react-router-dom";
 
 const columns = [
     {
-        name: "id",
-        label: "Number ID",
-        options: {
-            filter: true,
-            sort: true,
-            display: false,
-        },
-    },
-    {
-        name: "userId",
-        label: "Number ID",
-        options: {
-            filter: true,
-            sort: true,
-            display: false,
-        },
-    },
-    {
-        name: "name",
+        name: "firstName",
         label: "Name",
         options: {
             filter: true,
@@ -33,59 +15,68 @@ const columns = [
         },
     },
     {
-        label: "My Team",
-        name: "myTeam",
+        name: "lastName",
+        label: "Surname",
         options: {
-            customBodyRender: (data, ...args) => {
-                return <div>{data ? <FavoriteIcon /> : null}</div>;
-            },
+            filter: true,
+            sort: false,
+        },
+    },
+    {
+        name: "role",
+        label: "Role",
+        options: {
+            filter: true,
+            sort: false,
         },
     },
 ];
 
 function StaffTable(props) {
-    const [trainings, setTrainings] = useState([]);
+    const [staff, setStaff] = useState([]);
+
+    const fetchStaff = async () => {
+        axios.get("/staff").then((data) => {
+            setStaff(data.data);
+        });
+    };
 
     useEffect(() => {
-        const fetchTrainings = async () => {
-            axios.get("/staff").then((data) => {
-                setTrainings(data.data);
-            });
-        };
-
-        fetchTrainings();
+        fetchStaff();
     }, []);
 
     const handleEditClick = (e, payload) => {
-        console.log("handleEditClick", { e, payload });
-        console.log("handleEditClick", { props });
         props.history.push({
-            pathname: `/app/trainings/${payload.selectedRowData.id}`,
-            state: { team: payload.selectedRowData },
+            pathname: `/app/staff/${payload.selectedRowData.id}`,
+            state: { staff: payload.selectedRowData },
         });
     };
     const handleShowMoreClick = (e, payload) => {
-        console.log("handleShowMoreClick", { e, payload });
-        console.log("handleShowMoreClick", { props });
         props.history.push({
-            pathname: `/app/trainings/${payload.selectedRowData.id}`,
-            state: { team: payload.selectedRowData },
+            pathname: `/app/staff/${payload.selectedRowData.id}`,
+            state: { staff: payload.selectedRowData },
         });
     };
 
-    const handleDeleteClick = (...args) => {
-        console.log("handleEditClick", { args });
-        console.log("handleDeleteClick", { props });
+    const handleDeleteClick = (arg, payload) => {
+        axios
+            .delete(`/staff/${payload.selectedRowData.id}`)
+            .then(async () => {
+                await fetchStaff();
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
         <CustomTable
             title="Staff"
             columns={columns}
-            rows={trainings}
+            rows={staff}
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
+            showMore={false}
         />
     );
 }

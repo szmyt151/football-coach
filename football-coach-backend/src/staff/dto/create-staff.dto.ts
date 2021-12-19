@@ -9,4 +9,7 @@ export class CreateStaffDto {
 
   @ApiProperty()
   role: string;
+
+  @ApiProperty()
+  nationality: string;
 }

@@ -9,4 +9,16 @@ export class CreateTrainingDto {
 
   @ApiProperty()
   duration: number;
+
+  @ApiProperty()
+  description: string;
+
+  @ApiProperty()
+  teamId: string;
+
+  @ApiProperty()
+  staffId: string;
+
+  @ApiProperty()
+  player: string;
 }

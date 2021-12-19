@@ -1,84 +1,83 @@
-import React, { useState, useEffect} from "react";
-import { Grid } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
+import React, { useState, useEffect } from "react";
+import CustomTable from "../../components/Table/CustomTable";
 
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "../../axios";
 
-
 const columns = [
-  {
-   name: "id",
-   label: "Number ID",
-   options: {
-    filter: true,
-    sort: true,
-   }
-  },
-  {
-   name: "value",
-   label: "Value",
-   options: {
-    filter: true,
-    sort: false,
-   }
-  },
-  {
-   name: "paymentType",
-   label: "Type",
-   options: {
-    filter: true,
-    sort: false,
-   }
-  },
-  {
-    name: "userId",
-    label: "User",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   }
- ];
+    {
+        name: "paymentType",
+        label: "Type",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
+    {
+        name: "description",
+        label: "Description",
+        options: {
+            filter: true,
+            sort: true,
+        },
+    },
+    {
+        name: "value",
+        label: "Value",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
 
+    {
+        name: "user",
+        label: "User",
+        options: {
+            filter: true,
+            sort: false,
+            customBodyRender: (data, ...args) => {
+                return (
+                    <div>
+                        {data.firstName} {data.lastName}
+                    </div>
+                );
+            },
+        },
+    },
+];
 
 export default function UsersTables() {
-
-  const [rows, setRows] = useState([])
-
-
-  useEffect(() => {
+    const [rows, setRows] = useState([]);
     const fetchPayments = async () => {
-        axios.get('/payments')
-      .then(data => {
-        console.log(data)
-        setRows(data.data)
-      })
-    }
+        axios.get("/payments").then((data) => {
+            console.log(data);
+            setRows(data.data);
+        });
+    };
+    useEffect(() => {
+        fetchPayments();
+    }, []);
 
-    fetchPayments()
-  }, [])
+    const handleEditClick = (e, payload) => {};
+    const handleShowMoreClick = (e, payload) => {};
 
-  return (
-    <>
-      <PageTitle title="Payments" />
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <MUIDataTable
+    const handleDeleteClick = (e, payload) => {
+        axios.delete(`/payments/${payload.selectedRowData.id}`).then((data) => {
+            fetchPayments();
+        });
+    };
+
+    return (
+        <CustomTable
             title="Payments"
-            data={rows}
             columns={columns}
-            options={{
-              filterType: "checkbox",
-              download: false,
-              print: false,
-              viewColumns: false,
-              filter: false,
-            }}
-          />
-        </Grid>
-      </Grid>
-    </>
-  );
+            rows={rows}
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+            handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
+            showMore={false}
+        />
+    );
 }

@@ -7,19 +7,58 @@ import { withRouter } from "react-router-dom";
 
 const columns = [
     {
-        name: "name",
-        label: "Name",
+        name: "trainingType",
+        label: "Training type",
         options: {
             filter: true,
             sort: false,
         },
     },
     {
-        label: "My Team",
-        name: "myTeam",
+        name: "description",
+        label: "Description",
+    },
+    {
+        name: "date",
+        label: "Date",
         options: {
             customBodyRender: (data, ...args) => {
-                return <div>{data ? <FavoriteIcon /> : null}</div>;
+                return <div>{new Date(data).toLocaleDateString()}</div>;
+            },
+        },
+    },
+    {
+        name: "duration",
+        label: "Duration (min)",
+    },
+    {
+        name: "team",
+        label: "Team",
+        options: {
+            customBodyRender: (data, ...args) => {
+                return <div>{data.name}</div>;
+            },
+        },
+    },
+    {
+        name: "player",
+        label: "Players",
+        options: {
+            customBodyRender: (data, ...args) => {
+                return <div>{data.length}</div>;
+            },
+        },
+    },
+    {
+        name: "staff",
+        label: "Staff",
+        options: {
+            customBodyRender: (data, ...args) => {
+                return (
+                    <div>
+                        {data.firstName} {data.lastName}
+                    </div>
+                );
             },
         },
     },
@@ -28,13 +67,12 @@ const columns = [
 function TrainingsTable(props) {
     const [trainings, setTrainings] = useState([]);
 
+    const fetchTrainings = async () => {
+        axios.get("/training").then((data) => {
+            setTrainings(data.data);
+        });
+    };
     useEffect(() => {
-        const fetchTrainings = async () => {
-            axios.get("/training").then((data) => {
-                setTrainings(data.data);
-            });
-        };
-
         fetchTrainings();
     }, []);
 
@@ -51,9 +89,12 @@ function TrainingsTable(props) {
         });
     };
 
-    const handleDeleteClick = (...args) => {
-        console.log("handleEditClick", { args });
-        console.log("handleDeleteClick", { props });
+    const handleDeleteClick = (e, payload) => {
+        console.log("handleDeleteClick", { payload });
+
+        axios.delete(`/training/${payload.selectedRowData.id}`).then((data) => {
+            fetchTrainings();
+        });
     };
 
     return (
@@ -64,6 +105,7 @@ function TrainingsTable(props) {
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
         />
     );
 }

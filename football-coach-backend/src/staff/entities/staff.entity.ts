@@ -17,7 +17,7 @@ export enum StaffRole {
 
 @Entity()
 export class Staff {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: number;
 
   @Column()
@@ -26,6 +26,9 @@ export class Staff {
   @Column()
   lastName: string;
 
-  @Column("enum", { enum: StaffRole })
+  @Column({ nullable: true })
+  nationality: string;
+
+  @Column({ nullable: true })
   role: string;
 }

@@ -11,18 +11,19 @@ import { Training } from "./entities/training.entity";
 export class TrainingService {
   constructor(
     @InjectRepository(Training)
-    private trainingRepository: Repository<Training>,
-    @InjectRepository(Player)
-    private playerRepository: Repository<Player>,
-    @InjectRepository(Team)
-    private teamRepository: Repository<Team>
+    private trainingRepository: Repository<Training>
   ) {}
   findAll(): Promise<Training[]> {
-    return this.trainingRepository.find();
+    return this.trainingRepository.find({
+      relations: ["team", "player", "staff"],
+    });
   }
 
   findOne(id: number): Promise<Training> {
-    return this.trainingRepository.findOne(id);
+    return this.trainingRepository.findOne({
+      where: { id },
+      relations: ["team", "player", "staff"],
+    });
   }
 
   async remove(id: number): Promise<void> {
@@ -30,10 +31,24 @@ export class TrainingService {
   }
 
   async create(createTrainingDto: CreateTrainingDto) {
-    await this.trainingRepository.create(createTrainingDto);
+    const trainingDto = {
+      ...createTrainingDto,
+      player: createTrainingDto.player.split(",").map((e) => {
+        return <Player>{ id: parseInt(e) };
+      }),
+      teamId: createTrainingDto.teamId,
+      staffId: createTrainingDto.staffId,
+      team: <any>createTrainingDto.teamId,
+    };
+    console.log(trainingDto);
+    const training = this.trainingRepository.create(trainingDto);
+    console.log(training);
+    return this.trainingRepository.save(training);
+
+    // await this.trainingRepository.create(createTrainingDto);
   }
 
   async update(id: number, updateTrainingDto: UpdateTrainingDto) {
-    await this.trainingRepository.update(id, updateTrainingDto);
+    // await this.trainingRepository.update(id, updateTrainingDto);
   }
 }

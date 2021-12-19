@@ -2,6 +2,8 @@ import React from "react";
 import MatchModal from "../components/Modals/MatchModal";
 import PlayerModal from "../components/Modals/PlayerModal";
 import SeasonModal from "../components/Modals/SeasonModal";
+import StaffModal from "../components/Modals/StaffModal";
+import TrainingModal from "../components/Modals/TrainingModal";
 
 var LayoutStateContext = React.createContext();
 var LayoutDispatchContext = React.createContext();
@@ -19,6 +21,13 @@ function layoutReducer(state, action) {
 
         case "SEASON_MODAL":
             return { ...state, showSeasonModal: !state.showSeasonModal };
+
+        case "STAFF_MODAL":
+            return { ...state, showStaffModal: !state.showStaffModal };
+
+        case "TRAINING_MODAL":
+            return { ...state, showTrainingModal: !state.showTrainingModal };
+
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }
@@ -38,6 +47,8 @@ function LayoutProvider({ children }) {
                 {state.showMatchModal && <MatchModal />}
                 {state.showPlayerModal && <PlayerModal />}
                 {state.showSeasonModal && <SeasonModal />}
+                {state.showStaffModal && <StaffModal />}
+                {state.showTrainingModal && <TrainingModal />}
             </LayoutDispatchContext.Provider>
         </LayoutStateContext.Provider>
     );
@@ -69,6 +80,8 @@ export {
     toggleMatchModal,
     togglePlayerModal,
     toggleSeasonModal,
+    toggleStaffModal,
+    toggleTrainingModal,
 };
 
 // ###########################################################
@@ -93,5 +106,17 @@ function togglePlayerModal(dispatch) {
 function toggleSeasonModal(dispatch) {
     dispatch({
         type: "SEASON_MODAL",
+    });
+}
+
+function toggleStaffModal(dispatch) {
+    dispatch({
+        type: "STAFF_MODAL",
+    });
+}
+
+function toggleTrainingModal(dispatch) {
+    dispatch({
+        type: "TRAINING_MODAL",
     });
 }

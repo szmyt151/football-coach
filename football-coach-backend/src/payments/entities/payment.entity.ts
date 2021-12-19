@@ -9,6 +9,7 @@ import {
 
 export enum PaymentTypeEnum {
   MEMBER_PAYMENT = "Member payment",
+  ITEMS = "Items",
 }
 
 @Entity()

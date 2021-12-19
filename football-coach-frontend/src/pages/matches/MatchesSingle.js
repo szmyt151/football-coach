@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { SportsSoccer as SportsSoccerIcon } from "@material-ui/icons";
 
 export default function MatchesSingle(props) {
-    const [match, setMatch] = useState(props.location.state || null);
+    const [match, setMatch] = useState(null);
 
     useEffect(() => {
         const fetchMatch = async () => {
@@ -119,6 +119,7 @@ export default function MatchesSingle(props) {
                                     .map((ps) => {
                                         return (
                                             <div
+                                                key={ps.id}
                                                 style={{
                                                     display: "flex",
                                                     flexDirection: "row",

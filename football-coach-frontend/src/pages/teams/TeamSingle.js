@@ -14,9 +14,60 @@ import Typography from "@mui/material/Typography";
 import { getAge } from "../../components/Players/helpers";
 import Pitch from "../../components/Pitch/Pitch";
 import { Link } from "react-router-dom";
+import CustomTable from "../../components/Table/CustomTable";
+
+const matchesColumns = [
+    {
+        name: "homeTeamId",
+        label: "Home",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
+    {
+        name: "awayTeamId",
+        label: "Away",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
+
+    {
+        name: "scoreHome",
+        label: "Home score",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
+
+    {
+        name: "scoreAway",
+        label: "Away score",
+        options: {
+            filter: true,
+            sort: false,
+        },
+    },
+
+    {
+        name: "date",
+        label: "Date",
+        options: {
+            filter: true,
+            sort: false,
+            customBodyRender: (data, ...args) => {
+                return new Date(data).toLocaleDateString();
+            },
+        },
+    },
+];
 
 export default function TeamSingle(props) {
     const [team, setTeam] = useState(props.location.state || null);
+    const [teams, setTeams] = useState([]);
     const [teamPlayers, setTeamPlayers] = useState({});
     const [teamMatches, setTeamMatches] = useState({});
 
@@ -30,6 +81,16 @@ export default function TeamSingle(props) {
         fetchTeam();
     }, []);
 
+    useEffect(() => {
+        const fetchTeams = async () => {
+            console.log({ props });
+            axios.get(`/teams`).then((data) => {
+                setTeams(data.data);
+            });
+        };
+        fetchTeams();
+    }, []);
+
     if (team == null) {
         return null;
     }
@@ -37,18 +98,22 @@ export default function TeamSingle(props) {
     const players = team.players && team.players.filter((p) => p.firstsquad);
     const reserves = team.players && team.players.filter((p) => !p.firstsquad);
 
+    const matches =
+        team &&
+        team.teamMatches &&
+        team.teamMatches.map((tm) => {
+            return {
+                ...tm,
+                homeTeamId: teams.find((e) => e.id === tm.homeTeamId).name,
+                awayTeamId: teams.find((e) => e.id === tm.awayTeamId).name,
+            };
+        });
+
     return (
         <>
-            <PageTitle title={`${team.name}`} />
-
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <div>{JSON.stringify(team, null, 4)}</div>
-                </Grid>
-            </Grid>
             {team.players ? (
                 <>
-                    <PageTitle title="Team" />
+                    <PageTitle title={`Team ${team.name}`} />
                     <Card key={team.id}>
                         <CardContent>
                             <Grid container spacing={4}>
@@ -153,38 +218,14 @@ export default function TeamSingle(props) {
                 </>
             ) : null}
 
-            <PageTitle title="Last matches" />
             <Grid container spacing={4}>
                 <Grid item xs={12}>
-                    <Card key={team.id} sx={{ minWidth: 275 }}>
-                        <CardContent>
-                            <Typography
-                                sx={{ fontSize: 14 }}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                {team.matches ? "Last matches" : "No matches"}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
-
-            <PageTitle title="Statistics" />
-
-            <Grid container spacing={4}>
-                <Grid item xs={8}>
-                    <Card key={team.id} sx={{ minWidth: 275 }}>
-                        <CardContent>
-                            <Typography
-                                sx={{ fontSize: 14 }}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                Show player statistics here
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <CustomTable
+                        columns={matchesColumns}
+                        rows={matches}
+                        title="Last matches"
+                        selectableRows="none"
+                    />
                 </Grid>
             </Grid>
         </>

@@ -33,6 +33,7 @@ import SeasonsTable from "../../pages/sesaons/SeasonsTable";
 import SeasonSingle from "../../pages/sesaons/SeasonSingle";
 import StaffTable from "../../pages/staff/StaffTable";
 import TrainingsTable from "../../pages/trainings/TrainingsTable";
+import TrainingSingle from "../../pages/trainings/TrainingSingle";
 function Layout(props) {
     var classes = useStyles();
 
@@ -126,10 +127,10 @@ function Layout(props) {
                             path="/app/trainings"
                             component={TrainingsTable}
                         />
-                        {/* <Route
+                        <Route
                             path="/app/trainings/:trainingid"
-                            component={SeasonSingle}
-                        /> */}
+                            component={TrainingSingle}
+                        />
 
                         <Route exact path="/app/staff" component={StaffTable} />
                         {/* <Route

@@ -26,8 +26,8 @@ export class SeasonsService {
     });
   }
 
-  async remove(id: number): Promise<void> {
-    await this.seasonMatchRepository.delete(id);
+  async remove(id: number) {
+    return await this.seasonMatchRepository.delete(id);
   }
 
   async create(createSeasonDto: CreateSeasonDto) {
@@ -49,9 +49,9 @@ export class SeasonsService {
         return <Team>{ id: parseInt(e) };
       }),
     };
-    const season = this.seasonMatchRepository.create(seasonDto);
-    console.log(season);
-    return this.seasonMatchRepository.save(season);
+    return this.seasonMatchRepository.update(id, seasonDto);
+    // console.log(season);
+    // return this.seasonMatchRepository.save(season);
 
     // await this.seasonMatchRepository.update(id, updateSeasonDto);
   }

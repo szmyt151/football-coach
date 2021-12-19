@@ -1,4 +1,5 @@
 import { Player } from "src/players/entities/player.entity";
+import { Staff } from "src/staff/entities/staff.entity";
 import { Team } from "src/teams/entities/team.entity";
 import {
   Entity,
@@ -7,6 +8,9 @@ import {
   OneToOne,
   OneToMany,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
 } from "typeorm";
 
 export enum TrainingEnum {
@@ -18,7 +22,7 @@ export enum TrainingEnum {
 
 @Entity()
 export class Training {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("rowid")
   id: number;
 
   @Column()
@@ -27,14 +31,21 @@ export class Training {
   @Column()
   duration: number;
 
-  @Column("enum", { enum: TrainingEnum })
+  @Column()
   trainingType: string;
 
-  @OneToOne((type) => Team, (team) => team.id)
-  @JoinColumn()
+  @Column()
+  description: string;
+
+  @ManyToOne((type) => Team, (team) => team.id)
+  @JoinTable({ name: "teamId" })
   team: Team;
 
-  @OneToMany((type) => Player, (player) => player.id)
-  @JoinColumn()
+  @ManyToOne((type) => Staff, (staff) => staff.id)
+  @JoinTable({ name: "staffId" })
+  staff: Staff;
+
+  @ManyToMany((type) => Player, (player) => player.id)
+  @JoinTable()
   player: Player[];
 }

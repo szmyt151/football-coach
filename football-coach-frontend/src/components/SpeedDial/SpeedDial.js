@@ -7,12 +7,16 @@ import {
     StarHalf as StarHalfIcon,
     People as PeopleIcon,
     EmojiEvents as EmojiEventsIcon,
+    FitnessCenter as FitnessCenterIcon,
+    Accessibility as AccessibilityIcon,
 } from "@material-ui/icons";
 import {
     useLayoutDispatch,
     toggleMatchModal,
     togglePlayerModal,
     toggleSeasonModal,
+    toggleStaffModal,
+    toggleTrainingModal,
 } from "../../context/LayoutContext";
 
 export default function BasicSpeedDial() {
@@ -30,6 +34,13 @@ export default function BasicSpeedDial() {
 
         if (modalName === "season") {
             toggleSeasonModal(layoutDispatch);
+        }
+
+        if (modalName === "staff") {
+            toggleStaffModal(layoutDispatch);
+        }
+        if (modalName === "training") {
+            toggleTrainingModal(layoutDispatch);
         }
     };
 
@@ -57,6 +68,20 @@ export default function BasicSpeedDial() {
                 icon={<EmojiEventsIcon />}
                 tooltipTitle="Add Season"
                 onClick={() => openModal("season")}
+            />
+
+            <SpeedDialAction
+                key="AddStaff"
+                icon={<AccessibilityIcon />}
+                tooltipTitle="Add staff"
+                onClick={() => openModal("staff")}
+            />
+
+            <SpeedDialAction
+                key="AddTraining"
+                icon={<FitnessCenterIcon />}
+                tooltipTitle="Add training"
+                onClick={() => openModal("training")}
             />
         </SpeedDial>
     );
