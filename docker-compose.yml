@@ -1,54 +1,6 @@
 version: "3"
 
 services:
-  # backend:
-  #   image: footbalcoach_backend
-  #   build:
-  #      context: ./football-coach-backend
-  #      dockerfile: Dockerfile.backend
-  #     - ./football-coach-backend
-  #   ports:
-  #     - 3000:3000
-
-  # frontend:
-  #   image: footbalcoach_frontend
-  #   build:
-  #      context: ./football-coach-frontend
-  #      dockerfile: Dockerfile.frontend
-  #   ports:
-  #     - 3001:3000
-
-  # phpmyadmin:
-  #   depends_on:
-  #     - db
-  #   image: phpmyadmin/phpmyadmin
-  #   restart: always
-  #   ports:
-  #     - '8080:80'
-  #   environment:
-  #     PMA_HOST: db:3306
-  #     MYSQL_ROOT_PASSWORD: studentpassword 
-  #   networks:
-  #     - wpsite
-  #     - external
-
-  # # Database
-  # db:
-  #   image: mysql:5.7
-  #   volumes:
-  #     - db_data:/var/lib/mysql
-  #   restart: always
-  #   ports:
-  #     - '3306:3306'
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: studentpassword
-  #     MYSQL_DATABASE: footballCoach
-  #     MYSQL_USER: student
-  #     MYSQL_PASSWORD: studentpassword
-  #   networks:
-  #     - wpsite
-  #     - external
-
   postgres:
     image: postgres:14
     restart: always
@@ -62,46 +14,6 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
       - external
-
-  pgbackups:
-    container_name: Backup
-    image: prodrigestivill/postgres-backup-local
-    restart: always
-    volumes:
-      - ./backup:/backups
-    links:
-      - postgres:postgres
-    depends_on:
-      - postgres
-    environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DB=footballCoach
-      - POSTGRES_USER=student
-      - POSTGRES_PASSWORD=studentpassword
-      - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
-      - SCHEDULE=@every 0h1m00s
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=81
-    networks:
-      - external
-  # wordpress:
-  #   depends_on:
-  #     - db
-  #   image: wordpress:latest
-  #   ports:
-  #     - '8000:80'
-  #   restart: always
-  #   volumes: ['./wordpress:/var/www/html']
-  #   environment:
-  #     WORDPRESS_DB_HOST: db:3306
-  #     WORDPRESS_DB_USER: wordpress
-  #     WORDPRESS_DB_PASSWORD: wordpress
-  #     WORDPRESS_DB_PASSWORD: wordpress
-  #   networks:
-  #     - wpsite
-  #     - external
 
 volumes:
   postgres-data2:

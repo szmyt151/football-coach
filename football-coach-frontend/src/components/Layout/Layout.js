@@ -11,17 +11,12 @@ import Sidebar from "../Sidebar";
 import BasicSpeedDial from "../SpeedDial/SpeedDial";
 
 // pages
-import Dashboard from "../../pages/dashboard";
-import Typography from "../../pages/typography";
-import Notifications from "../../pages/notifications";
-import Maps from "../../pages/maps";
 import UsersTables from "../../pages/users";
 import PaymentTable from "../../pages/payment";
 import PlayersTable from "../../pages/players/PlayersTable";
 import TeamsTable from "../../pages/teams/TeamsTable";
 import TeamSingle from "../../pages/teams/TeamSingle";
 import PlayerSingle from "../../pages/players/PlayerSingle";
-import Icons from "../../pages/icons";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -52,18 +47,6 @@ function Layout(props) {
                 >
                     <div className={classes.fakeToolbar} />
                     <Switch>
-                        <Route path="/app/dashboard" component={Dashboard} />
-                        <Route path="/app/typography" component={Typography} />
-                        <Route
-                            path="/app/notifications"
-                            component={Notifications}
-                        />
-                        <Route
-                            exact
-                            path="/app/ui"
-                            render={() => <Redirect to="/app/ui/icons" />}
-                        />
-
                         <Route path="/app/users" component={UsersTables} />
                         <Route
                             path="/app/users/:userid"
@@ -137,9 +120,6 @@ function Layout(props) {
                             path="/app/staff/:staffid"
                             component={SeasonSingle}
                         /> */}
-
-                        <Route path="/app/ui/maps" component={Maps} />
-                        <Route path="/app/ui/icons" component={Icons} />
                     </Switch>
                     <BasicSpeedDial />
                 </div>

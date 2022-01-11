@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -26,7 +27,7 @@ export class Payment {
   @Column("enum", { enum: PaymentTypeEnum })
   paymentType: string;
 
-  @OneToOne((type) => User, (user) => user.id)
+  @ManyToOne((type) => User, (user) => user.id)
   @JoinColumn()
   user: number;
 }

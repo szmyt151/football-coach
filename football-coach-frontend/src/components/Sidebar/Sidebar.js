@@ -61,7 +61,7 @@ const structure = [
     //     ],
     // },
 
-    { id: 4, label: "Admins", link: "/app/users", icon: <PeopleIcon /> },
+    { id: 4, label: "Users", link: "/app/users", icon: <PeopleIcon /> },
     { id: 5, label: "Payments", link: "/app/payment", icon: <PaymentIcon /> },
     { id: 6, label: "Players", link: "/app/players", icon: <PeopleIcon /> },
     {

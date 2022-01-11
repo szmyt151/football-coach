@@ -1,8 +1,11 @@
+import { Team } from "src/teams/entities/team.entity";
 import {
   BeforeInsert,
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -31,4 +34,8 @@ export class Staff {
 
   @Column({ nullable: true })
   role: string;
+
+  @ManyToOne((type) => Team, (team) => team.id)
+  @JoinTable({ name: "teamId" })
+  team: Team;
 }
