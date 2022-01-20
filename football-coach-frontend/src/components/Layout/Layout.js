@@ -1,16 +1,11 @@
 import React from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import classnames from "classnames";
-
-// styles
 import useStyles from "./styles";
-
-// components
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import BasicSpeedDial from "../SpeedDial/SpeedDial";
 
-// pages
 import UsersTables from "../../pages/users";
 import PaymentTable from "../../pages/payment";
 import PlayersTable from "../../pages/players/PlayersTable";
@@ -18,7 +13,6 @@ import TeamsTable from "../../pages/teams/TeamsTable";
 import TeamSingle from "../../pages/teams/TeamSingle";
 import PlayerSingle from "../../pages/players/PlayerSingle";
 
-// context
 import { useLayoutState } from "../../context/LayoutContext";
 import PlayersStatistics from "../../pages/playersStatistics/PlayersStatistics";
 import PlayersStatisticsSingle from "../../pages/playersStatistics/PlayersStatisticsSingle";
@@ -29,10 +23,9 @@ import SeasonSingle from "../../pages/sesaons/SeasonSingle";
 import StaffTable from "../../pages/staff/StaffTable";
 import TrainingsTable from "../../pages/trainings/TrainingsTable";
 import TrainingSingle from "../../pages/trainings/TrainingSingle";
+
 function Layout(props) {
     var classes = useStyles();
-
-    // global
     var layoutState = useLayoutState();
 
     return (

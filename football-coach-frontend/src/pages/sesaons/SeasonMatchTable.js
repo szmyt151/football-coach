@@ -22,15 +22,6 @@ const columns = [
         },
     },
     {
-        name: "name",
-        label: "Team",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-
-    {
         name: "wins",
         label: "W",
         options: {

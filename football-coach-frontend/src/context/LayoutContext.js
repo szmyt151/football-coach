@@ -39,6 +39,9 @@ function LayoutProvider({ children }) {
         isSidebarOpened: true,
         showMatchModal: false,
         showPlayerModal: false,
+        showSeasonModal: false,
+        showStaffModal: false,
+        showTrainingModal: false,
     });
     return (
         <LayoutStateContext.Provider value={state}>

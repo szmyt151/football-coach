@@ -1,4 +1,3 @@
-import { PlayerStatisticsService } from "./../player-statistics/player-statistics.service";
 import {
   Controller,
   Get,
@@ -12,7 +11,8 @@ import { SeasonsService } from "./seasons.service";
 import { CreateSeasonDto } from "./dto/create-season.dto";
 import { UpdateSeasonDto } from "./dto/update-season.dto";
 import { PlayerStatistic } from "src/player-statistics/entities/player-statistic.entity";
-var _ = require("lodash");
+import { PlayerStatisticsService } from "./../player-statistics/player-statistics.service";
+import * as _ from "lodash";
 
 @Controller("seasons")
 export class SeasonsController {
