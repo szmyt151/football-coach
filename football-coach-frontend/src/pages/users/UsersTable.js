@@ -38,5 +38,12 @@ export default function UsersTables() {
         fetchUsers(useUsersDispatch, setRows);
     }, []);
 
-    return <CustomTable title="Users" columns={columns} rows={rows} />;
+    return (
+        <CustomTable
+            title="Users"
+            columns={columns}
+            rows={rows}
+            selectableRows="none"
+        />
+    );
 }

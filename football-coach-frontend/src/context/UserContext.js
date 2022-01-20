@@ -7,6 +7,8 @@ function userReducer(state, action) {
     switch (action.type) {
         case "LOGIN_SUCCESS":
             return { ...state, isAuthenticated: true };
+        case "USER_ME":
+            return { ...state, user: action.payload };
         case "SIGN_OUT_SUCCESS":
             return { ...state, isAuthenticated: false };
         default: {
@@ -18,6 +20,7 @@ function userReducer(state, action) {
 function UserProvider({ children }) {
     var [state, dispatch] = React.useReducer(userReducer, {
         isAuthenticated: !!localStorage.getItem("access_token"),
+        user: {},
     });
 
     return (
@@ -45,7 +48,15 @@ function useUserDispatch() {
     return context;
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
+export {
+    UserProvider,
+    useUserState,
+    useUserDispatch,
+    loginUser,
+    signOut,
+    createUser,
+    getMe,
+};
 
 // ###########################################################
 
@@ -66,8 +77,10 @@ async function loginUser(
                 username: login,
                 password,
             });
-
             localStorage.setItem("access_token", data.access_token);
+
+            getMe(dispatch);
+
             setError(null);
             setIsLoading(false);
             dispatch({ type: "LOGIN_SUCCESS" });
@@ -82,8 +95,42 @@ async function loginUser(
     }
 }
 
+async function createUser(dispatch, body, history, setIsLoading, setError) {
+    setError(false);
+    setIsLoading(true);
+    console.log(body);
+    if (!!body.username && !!body.password) {
+        try {
+            const { data } = await axios.post("/users", body);
+            setError(true);
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+            setError(false);
+        }
+    } else {
+        console.log("failed created");
+        dispatch({ type: "LOGIN_FAILURE" });
+        setError(false);
+        setIsLoading(false);
+    }
+}
+
 function signOut(dispatch, history) {
     localStorage.removeItem("access_token");
     dispatch({ type: "SIGN_OUT_SUCCESS" });
     history.push("/login");
+}
+
+async function getMe(dispatch) {
+    try {
+        const { data } = await axios.get("/me", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+        });
+        console.log("user", { user: data });
+        dispatch({ type: "USER_ME", payload: data });
+    } catch (error) {}
 }

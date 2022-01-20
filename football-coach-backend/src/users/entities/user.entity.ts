@@ -27,7 +27,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column("boolean")
+  @Column("boolean", { default: true })
   isActive: boolean;
 
   @OneToMany((type) => Payment, (payment) => payment.id)
@@ -35,7 +35,7 @@ export class User {
   payments: Payment[];
 
   @JoinColumn()
-  @OneToOne((type) => Team, (team) => team.id)
+  @OneToOne((type) => Team, (team) => team.id, { nullable: true })
   team: Team;
 
   @BeforeInsert()

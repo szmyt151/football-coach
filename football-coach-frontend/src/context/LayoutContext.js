@@ -17,8 +17,9 @@ function layoutReducer(state, action) {
             return { ...state, showMatchModal: !state.showMatchModal };
 
         case "PLAYER_MODAL":
-            return { ...state, showPlayerModal: !state.showPlayerModal };
-
+            return {
+                ...state,
+            };
         case "SEASON_MODAL":
             return { ...state, showSeasonModal: !state.showSeasonModal };
 

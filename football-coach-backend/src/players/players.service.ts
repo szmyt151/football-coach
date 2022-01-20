@@ -42,6 +42,7 @@ export class PlayersService {
   }
 
   async update(id: number, updatePlayerDto: UpdatePlayerDto) {
+    console.log(updatePlayerDto, id);
     await this.playerRepository.update(id, updatePlayerDto);
   }
 }

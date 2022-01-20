@@ -8,10 +8,8 @@ import {
     useLayoutDispatch,
     togglePlayerModal,
 } from "../../context/LayoutContext";
-import Form from "../Form/Form";
 import Typography from "@mui/material/Typography";
 import {
-    FormGroup,
     FormControl,
     TextField,
     Select,
@@ -23,8 +21,6 @@ import axios from "../../axios/index";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { Add as AddIcon } from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 

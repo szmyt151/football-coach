@@ -64,32 +64,36 @@ const columns = [
 
 function PlayersTable(props) {
     const [rows, setRows] = useState([]);
+    const fetchPlayers = async () => {
+        axios.get("/players").then((data) => {
+            setRows(data.data);
+        });
+    };
 
     useEffect(() => {
-        const fetchPlayers = async () => {
-            axios.get("/players").then((data) => {
-                setRows(data.data);
-            });
-        };
-
         fetchPlayers();
     }, []);
 
     const handleEditClick = (e, payload) => {
         console.log("handleEditClick", { e, payload });
+
         props.history.push({
-            pathname: `/app/players/${payload.selectedRowData.id}`,
+            pathname: `/app/players/${payload.selectedRowData.id}?edit`,
         });
     };
     const handleShowMoreClick = (e, payload) => {
-        console.log("handleShowMoreClick", { e, payload });
         props.history.push({
             pathname: `/app/players/${payload.selectedRowData.id}`,
         });
     };
 
-    const handleDeleteClick = (...args) => {
-        console.log("handleEditClick", { args });
+    const handleDeleteClick = (arg, payload) => {
+        axios
+            .delete(`/players/${payload.selectedRowData.id}`)
+            .then(async () => {
+                await fetchPlayers();
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
