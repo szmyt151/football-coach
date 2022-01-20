@@ -66,7 +66,7 @@ const matchesColumns = [
 ];
 
 export default function TeamSingle(props) {
-    const [team, setTeam] = useState(props.location.state || null);
+    const [team, setTeam] = useState();
     const [teams, setTeams] = useState([]);
     const [teamPlayers, setTeamPlayers] = useState({});
     const [teamMatches, setTeamMatches] = useState({});

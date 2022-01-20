@@ -60,7 +60,7 @@ function TeamTables(props) {
         console.log("handleEditClick", { e, payload });
         console.log("handleEditClick", { props });
         props.history.push({
-            pathname: `/app/teams/${payload.selectedRowData.id}`,
+            pathname: `/app/teams/${payload.selectedRowData.id}?edit`,
             state: { team: payload.selectedRowData },
         });
     };
@@ -86,6 +86,7 @@ function TeamTables(props) {
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
             handleShowMoreClick={handleShowMoreClick}
+            showEdit={false}
         />
     );
 }
